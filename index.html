@@ -49,6 +49,14 @@
             margin-top: 20px;
             text-align: left;
         }
+        #responseContainer {
+            max-height: 400px; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            border: 1 solid black; 
+            padding: 1px; 
+        }
+
         .animate {
             animation: pop 0.3s ease-in-out;
         }
@@ -61,7 +69,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>dub rizz</h1>
+        <h1>Dubrizz</h1>
+        <h6>the nonchalant rizzler</h6>
         <textarea id="inputField" placeholder="Paste conversation history and context (more context = better results)..."></textarea>
         <button id="respondButton">respond</button>
         <div id="responseContainer" class="response"></div>
@@ -79,9 +88,13 @@
                 try {
                     const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}`);
                     const data = await response.json();
+                    
 
                     const newResponse = document.createElement('div');
                     newResponse.textContent = data.response; 
+                    window.alert(data.responses)
+                    window.alert(data.her_sentiment)
+                    window.alert(data.dont_respond)
                     newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
                 } catch (error) {
