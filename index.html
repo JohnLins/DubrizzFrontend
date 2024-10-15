@@ -92,9 +92,16 @@
 
                     const newResponse = document.createElement('div');
                     newResponse.textContent = data.response; 
-                    window.alert(data.responses)
-                    window.alert(data.response.her_sentiment)
-                    window.alert(data.dont_respond)
+
+                    const obj = JSON.parse(data.response);
+                    window.alert(data)
+                    window.alert(data.response)
+                    window.alert(obj)
+                    window.alert(obj.responses)
+                    window.alert(obj.response[0])
+                    window.alert(obj.her_sentiment)
+                    window.alert(obj.dont_respond)
+                    
                     newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
                 } catch (error) {
