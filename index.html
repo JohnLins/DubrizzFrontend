@@ -65,17 +65,50 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+
+
+
+
+         .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: white;
+            color: lightcoral;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #ffe4e1;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        #preview {
+            max-width: 300px;
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Dubrizz</h1>
         <h6>the nonchalant rizzler</h6>
-        <textarea id="inputField" placeholder="Paste conversation history and context (more context = better results)..."></textarea>
+        <textarea id="inputField" placeholder="Paste conversation history and context (more context = better rizz)..."></textarea>
         
-        ...or upload pic of chat/profile:
+        ...or... <br/>
         
+        <label for="imageInput" class="custom-file-upload">
+        upload pic of chat or profile
+        </label>
         <input type="file" id="imageInput" accept="image/*">
+        
         <button id="respondButton">respond</button>
         <div id="responseContainer" class="response"></div>
     </div>
