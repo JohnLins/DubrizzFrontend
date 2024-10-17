@@ -128,9 +128,26 @@
 
                     
 
+                    fetch('https://dubrizz-production.up.railway.app/ss', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ base: base64String })
+                    })
+                    .then(response => response.json())
+                    .then(d => {
+                      document.getElementById('inputField').value = d.choices[0].message.content
+                        console.log('Success:', d);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    
+                    });
+
+
                     
                     
-                    document.getElementById('inputField').value = base64String;
                 };
                 reader.readAsDataURL(file);
             }
