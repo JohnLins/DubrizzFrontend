@@ -72,10 +72,37 @@
         <h1>Dubrizz</h1>
         <h6>the nonchalant rizzler</h6>
         <textarea id="inputField" placeholder="Paste conversation history and context (more context = better results)..."></textarea>
+        
+        ...or upload pic of chat/profile:
+        
+        <input type="file" id="imageInput" accept="image/*">
         <button id="respondButton">respond</button>
         <div id="responseContainer" class="response"></div>
     </div>
     <script>
+
+
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64String = e.target.result.split(',')[1]; // Get only the base64 part
+
+                    
+
+                    
+                    
+                    document.getElementById('inputField').value = base64String;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+
+
+        
         const respondButton = document.getElementById('respondButton');
         const inputField = document.getElementById('inputField');
         const responseContainer = document.getElementById('responseContainer');
