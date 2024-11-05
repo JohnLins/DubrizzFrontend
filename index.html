@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/x-icon" href="dubrizz.png">
+
     <title>Dubrizz</title>
     <style>
         body {
@@ -335,9 +338,8 @@ Her: what
 
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
-        window.alert("hi")
-            imgInput.disabled = true;
-            imgInput.textContent = "...";
+
+
 
             const file = event.target.files[0];
             if (file) {
@@ -371,8 +373,6 @@ Her: what
                 reader.readAsDataURL(file);
             }
 
-            imgInput.disabled = false;
-            //imgInput.textContent = "📷 upload screenshot of chat or profile";
         });
 
 
@@ -392,7 +392,8 @@ Her: what
             if (userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
-
+                document.getElementById('respondButton').disabled = false;
+                document.getElementById('respondButton').textContent = "again";
             }
 
 
@@ -423,7 +424,7 @@ Her: what
                   
                     newResponse.innerHTML = content; 
 
-                    
+
                     
                     //window.alert(obj.responses)
                    
@@ -439,10 +440,10 @@ Her: what
 
 
 
-                    const fallbackResponse = document.createElement('div');
-                    fallbackResponse.textContent = "ERROR"; 
-                    fallbackResponse.classList.add('animate');
-                    responseContainer.prepend(fallbackResponse);
+                    // const fallbackResponse = document.createElement('div');
+                    // fallbackResponse.textContent = "ERROR";
+                    // fallbackResponse.classList.add('animate');
+                    // responseContainer.prepend(fallbackResponse);
 
 
 
