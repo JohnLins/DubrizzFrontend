@@ -42,6 +42,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         button:hover {
             background-color: #ffe4e1;
@@ -52,12 +53,14 @@
         .response {
             margin-top: 20px;
             text-align: left;
+            background-color: #0078FE;
+            border-radius: 10px;
         }
         #responseContainer {
             max-height: 400px; 
             overflow-y: auto; 
             overflow-x: hidden; 
-            border: 1px solid black; 
+            /*border: 1px solid black; */
             padding: 1px; 
         }
 
@@ -72,7 +75,6 @@
 
 
 
-
          .custom-file-upload {
             display: inline-block;
             padding: 10px 20px;
@@ -83,10 +85,12 @@
             border: none;
             border-radius: 5px;
             font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .custom-file-upload:hover {
             background-color: #ffe4e1;
+
         }
 
         #imageInput {
@@ -101,8 +105,9 @@
     </style>
 </head>
 <body>
-<button id="google-login-btn">login</button>
-
+<div id="user" style="position:fixed; top: 20px; right: 20px">
+<button id="google-login-btn">login with Google</button>
+</div>
 
     <div class="container">
         <h1>Dubrizz</h1>
@@ -112,12 +117,12 @@
         
         
         <label for="imageInput" class="custom-file-upload">
-        🖼 upload screenshot of chat or profile
+        📷 upload screenshot of chat or profile
         </label>
         <input type="file" id="imageInput" accept="image/*">
         <br/><br/><br/>
         <button id="respondButton">respond</button>
-        <div id="responseContainer" class="response"></div>
+        <div id="responseContainer" ></div>
     </div>
 
 
@@ -127,7 +132,7 @@
 
     <script type="module">
       let userId
-
+      let userName
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
       import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
       import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
@@ -154,13 +159,30 @@
           .then((result) => {
             const user = result.user;
             userId = user.uid;
-            window.alert("User ID: " + userId);
+            userName = user.displayName
+
+
+
+
+            const userDiv = document.getElementById('user');
+            const googleLoginBtn = document.getElementById('google-login-btn');
+
+            googleLoginBtn.style.display = 'none';
+
+            const userNameSpan = document.createElement('span');
+            userNameSpan.textContent = userName;
+
+            userDiv.appendChild(userNameSpan);
+
+
+
+
+            //window.alert("User ID: " + userId);
           })
           .catch((error) => {
             console.error("Error signing in:", error);
           });
       });
-
 
 
 
@@ -225,7 +247,7 @@
                     
                     let content = "";
                     obj.responses.forEach(response => {
-                      content += `<div class="response">${response}</div>`;
+                      content += `<div class="response">${response}</div><br/>`;
                     });
                   
                     newResponse.innerHTML = content; 
