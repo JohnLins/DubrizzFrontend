@@ -101,6 +101,9 @@
     </style>
 </head>
 <body>
+<button id="google-login-btn">login</button>
+
+
     <div class="container">
         <h1>Dubrizz</h1>
         <!--<h6>the nonchalant rizzler</h6>-->
@@ -116,7 +119,52 @@
         <button id="respondButton">respond</button>
         <div id="responseContainer" class="response"></div>
     </div>
-    <script>
+
+
+
+
+
+
+    <script type="module">
+      let userId
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDcixgwxGbBvBKWpVw0XJYzzhmeXpp3FBU",
+        authDomain: "dubrizz.firebaseapp.com",
+        projectId: "dubrizz",
+        storageBucket: "dubrizz.appspot.com",
+        messagingSenderId: "376279827690",
+        appId: "1:376279827690:web:529761e9563dbab4200393",
+        measurementId: "G-GTBN0VJ4GN"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      auth.languageCode = 'en';
+      const provider = new GoogleAuthProvider();
+      const analytics = getAnalytics(app);
+
+      const googleLogin = document.getElementById("google-login-btn");
+      googleLogin.addEventListener("click", function() {
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            const user = result.user;
+            userId = user.uid;
+            window.alert("User ID: " + userId);
+          })
+          .catch((error) => {
+            console.error("Error signing in:", error);
+          });
+      });
+
+
+
+
+    /////////////////////////////////////////
 
 
         document.getElementById('imageInput').addEventListener('change', function(event) {
@@ -167,7 +215,7 @@
 
             if (history !== "") {
                 try {
-                    const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}`);
+                    const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(userId)}`);
                     const data = await response.json();
                     
 
@@ -209,5 +257,10 @@
             responseState = "respond";
         });
     </script>
+
+
+
+
+
 </body>
 </html>
