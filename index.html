@@ -277,60 +277,76 @@ Her: what
 
 
     <script type="module">
-      let userId
-      let userName
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-      import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
+      let userId;
+let userName;
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyDcixgwxGbBvBKWpVw0XJYzzhmeXpp3FBU",
-        authDomain: "dubrizz.firebaseapp.com",
-        projectId: "dubrizz",
-        storageBucket: "dubrizz.appspot.com",
-        messagingSenderId: "376279827690",
-        appId: "1:376279827690:web:529761e9563dbab4200393",
-        measurementId: "G-GTBN0VJ4GN"
-      };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      auth.languageCode = 'en';
-      const provider = new GoogleAuthProvider();
-      const analytics = getAnalytics(app);
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDcixgwxGbBvBKWpVw0XJYzzhmeXpp3FBU",
+  authDomain: "dubrizz.firebaseapp.com",
+  projectId: "dubrizz",
+  storageBucket: "dubrizz.appspot.com",
+  messagingSenderId: "376279827690",
+  appId: "1:376279827690:web:529761e9563dbab4200393",
+  measurementId: "G-GTBN0VJ4GN"
+};
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+auth.languageCode = 'en';
+const provider = new GoogleAuthProvider();
+const analytics = getAnalytics(app);
 
-      function signin(){
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            const user = result.user;
-            userId = user.uid;
-            userName = user.displayName
+// Set local persistence to keep user signed in across sessions
+function signin() {
+  setPersistence(auth, browserLocalPersistence)
+    .then(() => {
+      return signInWithPopup(auth, provider);
+    })
+    .then((result) => {
+      const user = result.user;
+      userId = user.uid;
+      userName = user.displayName;
 
+      const userDiv = document.getElementById('user');
+      const googleLoginBtn = document.getElementById('google-login-btn');
+      googleLoginBtn.style.display = 'none';
 
+      const userNameSpan = document.createElement('span');
+      userNameSpan.textContent = userName;
+      userDiv.appendChild(userNameSpan);
+    })
+    .catch((error) => {
+      console.error("Error signing in:", error);
+    });
+}
 
+// Detect and display user on page load if they're already signed in
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userId = user.uid;
+    userName = user.displayName;
 
-            const userDiv = document.getElementById('user');
-            const googleLoginBtn = document.getElementById('google-login-btn');
+    const userDiv = document.getElementById('user');
+    const googleLoginBtn = document.getElementById('google-login-btn');
+    googleLoginBtn.style.display = 'none';
 
-            googleLoginBtn.style.display = 'none';
+    const userNameSpan = document.createElement('span');
+    userNameSpan.textContent = userName;
+    userDiv.appendChild(userNameSpan);
+  }
+});
 
-            const userNameSpan = document.createElement('span');
-            userNameSpan.textContent = userName;
-
-            userDiv.appendChild(userNameSpan);
-
-
-          })
-          .catch((error) => {
-            console.error("Error signing in:", error);
-          });
-      }
-
-      const googleLogin = document.getElementById("google-login-btn");
-      googleLogin.addEventListener("click", function() {
-        signin();
-      });
+// Event listener for the login button
+const googleLogin = document.getElementById("google-login-btn");
+googleLogin.addEventListener("click", function() {
+  signin();
+});
 
 
 
