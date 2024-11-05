@@ -6,7 +6,7 @@
 
   <link rel="icon" type="image/x-icon" href="dubrizz.png">
 
-    <title>Dubrizz</title>
+    <title>Dubrizz AI</title>
     <style>
         body {
             display: flex;
@@ -249,7 +249,7 @@
 
     <div class="container">
     <img src="dubrizz.png" height="60px" style="margin-bottom: -50px"/>
-        <h1>Dubrizz</h1>
+        <h1>Dubrizz AI</h1>
         <!--<h6>the nonchalant rizzler</h6>-->
         <textarea id="inputField" placeholder="Paste conversation history and context (more context = better rizz)...
 
@@ -338,7 +338,10 @@ Her: what
 
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
-
+        if (userId === undefined) {
+                console.error("User is not logged in.");
+                signin();
+            }
 
 
             const file = event.target.files[0];
@@ -354,7 +357,7 @@ Her: what
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ base: base64String })
+                        body: JSON.stringify({ base: base64String, id: userId })
                     })
                     .then(response => response.json())
                     .then(d => {
