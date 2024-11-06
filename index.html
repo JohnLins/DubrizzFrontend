@@ -458,19 +458,19 @@ googleLogin.addEventListener("click", function() {
                     });
 
 
-                    if obj.dont_respond {
+                    if (obj.dont_respond) {
                       content = `<div class="shittest">Don't respond, she is being too dry</div><br/>`+content;
                     }
 
-                    if obj.she_taking_much_longer {
+                    if (obj.she_taking_much_longer) {
                       content = `<div class="shittest">Wait at least one day before responding</div><br/>`+content;
                     }
 
-                    if obj.she_said_she_bad_texter {
+                    if (obj.she_said_she_bad_texter) {
                       content = `<div class="shittest">Stop texting her, there is no such thing as a girl who's a 'bad texter'</div><br/>`+content;
                     }
 
-                    if obj.she_express_distaste {
+                    if (obj.she_express_distaste) {
                       content = `<div class="shittest">Double-down, she is expressing distaste to see how you react</div><br/>`+content;
                     }
 
