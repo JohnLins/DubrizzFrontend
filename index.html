@@ -54,7 +54,7 @@
         width: 100%;
       }
         .response {
-            margin-top: 20px;
+            margin-top: 10px;
             text-align: left;
             padding: 10px 15px;
             border-radius: 18px 18px 18px 0;
@@ -62,6 +62,19 @@
             color: white;
             display: inline-block;
         }
+
+
+        .shittest{
+            margin-top: 10px;
+            text-align: left;
+            padding: 10px 15px;
+            border-radius: 18px;
+            background-color: lightcoral;
+            border: 1px solid red;
+            color: red;
+            display: inline-block;
+        }
+
         #responseContainer {
             max-height: 400px; 
             overflow-y: auto; 
@@ -261,13 +274,16 @@ Her: what
 "></textarea>
         <br/>
         
-        
+        <b>
         <label for="imageInput" class="custom-file-upload">
-        <b>📷 upload screenshot of chat or profile</b>
+        📷 upload screenshot of chat or profile
         </label>
+        </b>
         <input type="file" id="imageInput" accept="image/*">
         <br/><br/><br/>
-        <button id="respondButton"><b>respond</b></button>
+        <b>
+        <button id="respondButton">respond</button>
+        </b>
         <div id="responseContainer" ></div>
     </div>
 
@@ -276,8 +292,8 @@ Her: what
 
 
 
-    <script type="module">
-      let userId;
+<script type="module">
+let userId;
 let userName;
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -440,12 +456,35 @@ googleLogin.addEventListener("click", function() {
                     obj.responses.forEach(response => {
                       content += `<div class="response">${response}</div><br/>`;
                     });
+
+
+                    if obj.dont_respond {
+                      content = `<div class="shittest">Don't respond, she is being too dry</div><br/>`+content;
+                    }
+
+                    if obj.she_taking_much_longer {
+                      content = `<div class="shittest">Wait at least one day before responding</div><br/>`+content;
+                    }
+
+                    if obj.she_said_she_bad_texter {
+                      content = `<div class="shittest">Stop texting her, there is no such thing as a girl who's a 'bad texter'</div><br/>`+content;
+                    }
+
+                    if obj.she_express_distaste {
+                      content = `<div class="shittest">Double-down, she is expressing distaste to see how you react</div><br/>`+content;
+                    }
+
+
+
+
+
+
+
                   
                     newResponse.innerHTML = content; 
 
 
                     
-                    //window.alert(obj.responses)
                    
                     
                     newResponse.classList.add('animate');
