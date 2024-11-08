@@ -1,11 +1,8 @@
-
-let userId;
-let userName;
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-
+let userId;
+let userName;
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDcixgwxGbBvBKWpVw0XJYzzhmeXpp3FBU",
