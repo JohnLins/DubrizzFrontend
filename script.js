@@ -150,8 +150,8 @@ googleLogin.addEventListener("click", function() {
             if (userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
-                respondButto.disabled = false;
-                respondButto.textContent = "again";
+                respondButton.disabled = false;
+                respondButton.textContent = "again";
                 respondButton.style.backgroundColor = "white"
             }
 
