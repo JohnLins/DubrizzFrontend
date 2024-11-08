@@ -71,6 +71,25 @@ googleLogin.addEventListener("click", function() {
 
     /////////////////////////////////////////
 
+
+
+//         function pausebtn(id, active) {
+//
+//             document.getElementById('respondButton').disabled = active;
+//             document.getElementById('respondButton').span = "again";
+//
+//
+//             const button = document.getElementById("respondButton");
+//             const span = button.querySelector("span");
+//
+//             // Hide the span and add "loading..." text after it
+//             span.style.display = "none";
+//             button.append("loading...");
+//
+//         }
+
+
+
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
         if (userId === undefined) {
@@ -124,14 +143,16 @@ googleLogin.addEventListener("click", function() {
 
         respondButton.addEventListener('click', async () => {
 
-            respondButton.textContent = "...";
+            respondButton.textContent = "loading...";
+            respondButton.style.backgroundColor = "lightgray"
             respondButton.disabled = true;
 
             if (userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
-                document.getElementById('respondButton').disabled = false;
-                document.getElementById('respondButton').textContent = "again";
+                respondButto.disabled = false;
+                respondButto.textContent = "again";
+                respondButton.style.backgroundColor = "white"
             }
 
 
@@ -196,13 +217,14 @@ googleLogin.addEventListener("click", function() {
 
                     document.getElementById('respondButton').disabled = false;
                     document.getElementById('respondButton').textContent = "again";
+                    respondButton.style.backgroundColor = "white"
                 } catch (error) {
                     console.error('Error fetching the response:', error);
 
 
 
                     const fallbackResponse = document.createElement('div');
-                    fallbackResponse.textContent = "ERROR";
+
                     fallbackResponse.classList.add('animate');
                     responseContainer.prepend(fallbackResponse);
                     const newResponse = document.createElement('div');
@@ -211,7 +233,7 @@ googleLogin.addEventListener("click", function() {
                     responseContainer.prepend(newResponse);
                     document.getElementById('respondButton').disabled = false;
                     document.getElementById('respondButton').textContent = "again";
-
+                    respondButton.style.backgroundColor = "white"
 
 
 
