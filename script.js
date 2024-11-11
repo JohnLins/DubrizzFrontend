@@ -158,7 +158,7 @@ googleLogin.addEventListener("click", function() {
 
             const history = inputField.value.trim();
 
-            if (history !== "") {
+            if (history != "") {
                 try {
                     const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(userId)}`);
 
@@ -215,8 +215,8 @@ googleLogin.addEventListener("click", function() {
                     responseContainer.prepend(newResponse);
 
 
-                    document.getElementById('respondButton').disabled = false;
-                    document.getElementById('respondButton').textContent = "again";
+                    respondButton.disabled = false;
+                    respondButton.textContent = "again";
                     respondButton.style.backgroundColor = "white"
                 } catch (error) {
                     console.error('Error fetching the response:', error);
@@ -231,8 +231,8 @@ googleLogin.addEventListener("click", function() {
                     newResponse.innerHTML = '<div class="error">Error! Rephrase and try again</div>';
                     newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
-                    document.getElementById('respondButton').disabled = false;
-                    document.getElementById('respondButton').textContent = "again";
+                    respondButton.disabled = false;
+                    respondButton.textContent = "again";
                     respondButton.style.backgroundColor = "white"
 
 
@@ -242,12 +242,14 @@ googleLogin.addEventListener("click", function() {
 
 
                 }
+
+                if (responseState === "respond") {
+                  respondButton.textContent = "another";
+                  responseState = "another";
+                }
             }
 
-            if (responseState === "respond") {
-                respondButton.textContent = "another";
-                responseState = "another";
-            }
+
         });
 
         inputField.addEventListener('input', () => {
