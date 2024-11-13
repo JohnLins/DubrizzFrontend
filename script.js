@@ -21,6 +21,16 @@ auth.languageCode = 'en';
 const provider = new GoogleAuthProvider();
 const analytics = getAnalytics(app);
 
+
+
+function displaypaymentlink(email){
+  paylink = document.getElementById("paylink");
+  paylink.style.display = "block";
+  paylink.href = "https://buy.stripe.com/cN2aHD67QbNweT6aEE?prefilled_email=" + email;
+
+
+}
+
 // Set local persistence to keep user signed in across sessions
 function signin() {
   setPersistence(auth, browserLocalPersistence)
@@ -81,6 +91,9 @@ onAuthStateChanged(auth, (user) => {
 
     const userNameSpan = document.getElementById('username');
     userNameSpan.textContent = userName;
+
+    displaypaymentlink(user.email);
+
     //userDiv.appendChild(userNameSpan);
   }
 });
