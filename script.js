@@ -59,7 +59,7 @@ function signin() {
                   .catch(error => {
                     console.error('Error adding user to Firestore:', error);
                   });
-              })
+            
    
 
       
