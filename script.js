@@ -120,8 +120,8 @@ function fetchUserCredits(userId) {
     .then(response => response.json())
     .then(data => {
       if (data.credits !== undefined) {
-        window.alert(`User Credits: ${data.credits}`);
-        
+
+        document.getElementById("credits").textContent = `Credits remaining: ${data.credits}`
       } else {
         window.alert(`Error: ${data.error}`);
       }
