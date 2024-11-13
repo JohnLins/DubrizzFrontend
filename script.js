@@ -49,7 +49,7 @@ function signin() {
                   },
                   body: JSON.stringify({
       
-                    email: userEmail
+                    uid: userId
                   }),
                 })
                   .then(response => response.json())
