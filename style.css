@@ -14,6 +14,14 @@ body {
     width: 90%;
     max-width: 600px;
 }
+
+#credits {
+  margin: 5px;
+  font-size: 75%;
+  color: lightcoral;
+
+}
+
 textarea {
     width: 100%;
     padding: 15px; /* Increased padding */
