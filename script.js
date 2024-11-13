@@ -113,6 +113,27 @@ googleLogin.addEventListener("click", function() {
 //         }
 
 
+function fetchUserCredits(userId) {
+  const url = `https://dubrizz-production.up.railway.app/credits?uid=${encodeURIComponent(userId)}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.credits !== undefined) {
+        window.alert(`User Credits: ${data.credits}`);
+        
+      } else {
+        window.alert(`Error: ${data.error}`);
+      }
+    })
+    .catch(error => {
+      window.alert(`Error fetching credits: ${error.message}`);
+    });
+}
+
+
+
+
 
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
@@ -225,10 +246,6 @@ googleLogin.addEventListener("click", function() {
 
 
 
-
-
-
-
                     newResponse.innerHTML = content;
 
 
@@ -237,6 +254,7 @@ googleLogin.addEventListener("click", function() {
 
                     newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
+
 
 
                     respondButton.disabled = false;
@@ -266,6 +284,18 @@ googleLogin.addEventListener("click", function() {
 
 
                 }
+
+
+
+
+
+               fetchUserCredits(userId);
+
+
+
+
+
+              
 
                 if (responseState === "respond") {
                   respondButton.textContent = "another";
