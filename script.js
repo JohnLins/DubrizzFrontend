@@ -39,6 +39,30 @@ function signin() {
       const userNameSpan = document.createElement('span');
       userNameSpan.textContent = userName;
       userDiv.replaceChildren(userNameSpan);
+
+
+
+                 fetch('https://dubrizz-production.up.railway.app/register', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+      
+                    email: userEmail
+                  }),
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                    console.log('User added to Firestore:', data);
+                  })
+                  .catch(error => {
+                    console.error('Error adding user to Firestore:', error);
+                  });
+              })
+   
+
+      
     })
     .catch((error) => {
       console.error("Error signing in:", error);
