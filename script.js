@@ -134,7 +134,7 @@ function fetchUserCredits(userId) {
     .then(data => {
       if (data.credits !== undefined) {
         if(data.credits == 0){
-          document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="`document.getElementById("paylink").href`">pro</a>`
+          document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="`+document.getElementById("paylink").href+`">pro</a>`
         }
         else {
           document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`
