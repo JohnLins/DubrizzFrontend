@@ -287,7 +287,12 @@ function fetchUserCredits(userId) {
                     fallbackResponse.classList.add('animate');
                     responseContainer.prepend(fallbackResponse);
                     const newResponse = document.createElement('div');
-                    newResponse.innerHTML = '<div class="error">Error! Rephrase and try again</div>';
+                    if(document.getElementById("credits").innerHTML.substring(0, 20) == `u ran out of credits`){
+                        newResponse.innerHTML = `<div class="error">Get more credits with <a href="`+document.getElementById("paylink").href+`">pro</a></div>`;
+                    }else {
+                        newResponse.innerHTML = '<div class="error">Error! Rephrase and try again</div>';
+                    }
+
                     newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
                     respondButton.disabled = false;
