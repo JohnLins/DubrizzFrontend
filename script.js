@@ -29,7 +29,7 @@ window.copyText = function(button) {
 
   navigator.clipboard.writeText(textToCopy)
     .then(() => {
-      window.alert("copied");
+      window.alert("copied '"+textToCopy+"'");
     })
     .catch(err => {
       console.error("Failed to copy text: ", err);
@@ -172,58 +172,56 @@ function fetchUserCredits(userId) {
 
 
 
-        const imgInput = document.getElementById('imageInput');
-        const imgLabel = document.getElementById('imglabel');
-        imgInput.addEventListener('click', function(event) {
+  const imgInput = document.getElementById('imageInput');
+  const imgLabel = document.getElementById('imglabel');
+imgLabel.addEventListener('click', () => {
+  imgLabel.textContent = "loading...";
+  imgLabel.style.backgroundColor = "lightgray";
+  imgLabel.style.pointerEvents = "none"; // Prevent further clicks
+});
 
-            imgLabel.textContent = "loading...";
-            imgLabel.style.backgroundColor = "lightgray";
-            imgLabel.style.pointerEvents = "none";
+// Handle the file selection
+imgInput.addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const base64String = e.target.result.split(',')[1]; // Get only the base64 part
 
-        if (userId === undefined) {
-                console.error("User is not logged in.");
-                signin();
-            }
-
-
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64String = e.target.result.split(',')[1]; // Get only the base64 part
-
-
-
-                    fetch('https://dubrizz-production.up.railway.app/ss', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ base: base64String, id: userId })
-                    })
-                    .then(response => response.json())
-                    .then(d => {
-                      document.getElementById('inputField').value = d.choices[0].message.content
-                        console.log('Success:', d);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-
-                    });
-
-
-
-
-                };
-                reader.readAsDataURL(file);
-            }
-
-
-            imgLabel.style.pointerEvents = "auto";
-            imgLabel.textContent = "📷 upload screenshot of chat or profile";
-            imgLabel.style.backgroundColor = "white"
-
+      fetch('https://dubrizz-production.up.railway.app/ss', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ base: base64String, id: userId })
+      })
+        .then(response => response.json())
+        .then(d => {
+          document.getElementById('inputField').value = d.choices[0].message.content;
+          console.log('Success:', d);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })
+        .finally(() => {
+          // Restore label state after processing
+          imgLabel.textContent = "📷 upload screenshot of chat or profile";
+          imgLabel.style.backgroundColor = "white";
+          imgLabel.style.pointerEvents = "auto";
         });
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    // Restore the label if no file was selected
+    imgLabel.textContent = "📷 upload screenshot of chat or profile";
+    imgLabel.style.backgroundColor = "white";
+    imgLabel.style.pointerEvents = "auto";
+  }
+});
+
+
+
 
 
 
