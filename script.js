@@ -126,17 +126,7 @@ googleLogin.addEventListener("click", function() {
 //         }
 
 
-function copyText(elementId) {
-    const textToCopy = document.getElementById(elementId).innerText;
 
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        window.alert("Copied"+textToCopy)
-      })
-      .catch(err => {
-        console.error("Failed to copy text: ", err);
-      });
-  }
 
 
 function fetchUserCredits(userId) {
@@ -167,6 +157,11 @@ function fetchUserCredits(userId) {
 
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
+
+            respondButton.textContent = "loading...";
+            respondButton.style.backgroundColor = "lightgray"
+            respondButton.disabled = true;
+
         if (userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
@@ -204,6 +199,11 @@ function fetchUserCredits(userId) {
                 };
                 reader.readAsDataURL(file);
             }
+
+
+            respondButton.disabled = false;
+            respondButton.textContent = "📷 upload screenshot of chat or profile";
+            respondButton.style.backgroundColor = "white"
 
         });
 
@@ -348,4 +348,20 @@ function fetchUserCredits(userId) {
             respondButton.textContent = "respond";
             responseState = "respond";
         });
+
+
+
+
+
+  function copyText(elementId) {
+    const textToCopy = document.getElementById(elementId).innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        window.alert("Copied"+textToCopy)
+      })
+      .catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+  }
 
