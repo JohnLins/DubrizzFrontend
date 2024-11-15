@@ -24,21 +24,17 @@ const analytics = getAnalytics(app);
 
 
 
-  function copyText(button) {
-    // Get the text inside the button
-    const textToCopy = button.innerText;
+window.copyText = function(button) {
+  const textToCopy = button.innerText;
 
-    // Copy text to clipboard
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        // Show a confirmation message
-        widow.alert("copied")
-      })
-      .catch(err => {
-        console.error("Failed to copy text: ", err);
-      });
-  }
-
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      window.alert("copied");
+    })
+    .catch(err => {
+      console.error("Failed to copy text: ", err);
+    });
+};
 
 
 
@@ -178,11 +174,11 @@ function fetchUserCredits(userId) {
 
         const imgInput = document.getElementById('imageInput');
         const imgLabel = document.getElementById('imglabel');
-        imgInput.addEventListener('change', function(event) {
+        imgInput.addEventListener('click', function(event) {
 
             imgLabel.textContent = "loading...";
-            imgLabel.style.backgroundColor = "lightgray"
-            imgLabel.disabled = true;
+            imgLabel.style.backgroundColor = "lightgray";
+            imgLabel.style.pointerEvents = "none";
 
         if (userId === undefined) {
                 console.error("User is not logged in.");
@@ -223,7 +219,7 @@ function fetchUserCredits(userId) {
             }
 
 
-            imgLabel.disabled = false;
+            imgLabel.style.pointerEvents = "auto";
             imgLabel.textContent = "📷 upload screenshot of chat or profile";
             imgLabel.style.backgroundColor = "white"
 
