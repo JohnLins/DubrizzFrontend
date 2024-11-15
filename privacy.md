@@ -22,9 +22,6 @@ If the input you provide contains any conversation or information involving anot
 
 We take the security of your information seriously and implement reasonable measures to protect it. Dubrizz uses industry-standard practices to safeguard input data, both during transmission and once received. However, no method of transmission or storage is entirely secure, and we cannot guarantee absolute security of your data.
 
-### 5. Data Retention and Deletion
-
-Dubrizz retains user input data for as long as it is necessary for the purposes outlined in this policy or as required by law. You may request the deletion of your input data by contacting us, and we will take steps to comply with your request as required by applicable regulations.
 
 ### 6. Legal Requirements
 

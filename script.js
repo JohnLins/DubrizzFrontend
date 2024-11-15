@@ -126,6 +126,19 @@ googleLogin.addEventListener("click", function() {
 //         }
 
 
+function copyText(elementId) {
+    const textToCopy = document.getElementById(elementId).innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        window.alert("Copied"+textToCopy)
+      })
+      .catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+  }
+
+
 function fetchUserCredits(userId) {
   const url = `https://dubrizz-production.up.railway.app/credits?uid=${encodeURIComponent(userId)}`;
 
@@ -198,10 +211,12 @@ function fetchUserCredits(userId) {
 
 
 
+
         const respondButton = document.getElementById('respondButton');
         const inputField = document.getElementById('inputField');
         const responseContainer = document.getElementById('responseContainer');
         let responseState = "respond";
+        var resnum = 0;
 
         respondButton.addEventListener('click', async () => {
 
@@ -240,7 +255,8 @@ function fetchUserCredits(userId) {
 
                     let content = "";
                     obj.responses.forEach(response => {
-                      content += `<div class="response">${response}</div><br/>`;
+                      content += `<button class="response" onclick="copyText('response-${resnum}')" id="response-${resnum}">${response}</button><br/>`;
+                      resnum += 1;
                     });
 
 
