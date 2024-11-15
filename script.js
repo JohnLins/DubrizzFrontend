@@ -24,17 +24,20 @@ const analytics = getAnalytics(app);
 
 
 
-function copyText(elementId) {
-  const textToCopy = document.getElementById(elementId).innerText;
+  function copyText(button) {
+    // Get the text inside the button
+    const textToCopy = button.innerText;
 
-  navigator.clipboard.writeText(textToCopy)
-    .then(() => {
-      window.alert("Copied"+textToCopy)
-    })
-    .catch(err => {
-      console.error("Failed to copy text: ", err);
-    });
-}
+    // Copy text to clipboard
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        // Show a confirmation message
+        widow.alert("copied")
+      })
+      .catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+  }
 
 
 
@@ -174,11 +177,12 @@ function fetchUserCredits(userId) {
 
 
         const imgInput = document.getElementById('imageInput');
+        const imgLabel = document.getElementById('imglabel');
         imgInput.addEventListener('change', function(event) {
 
-            imgInput.textContent = "loading...";
-            imgInput.style.backgroundColor = "lightgray"
-            imgInput.disabled = true;
+            imgLabel.textContent = "loading...";
+            imgLabel.style.backgroundColor = "lightgray"
+            imgLabel.disabled = true;
 
         if (userId === undefined) {
                 console.error("User is not logged in.");
@@ -219,9 +223,9 @@ function fetchUserCredits(userId) {
             }
 
 
-            imgInput.disabled = false;
-            imgInput.textContent = "📷 upload screenshot of chat or profile";
-            imgInput.style.backgroundColor = "white"
+            imgLabel.disabled = false;
+            imgLabel.textContent = "📷 upload screenshot of chat or profile";
+            imgLabel.style.backgroundColor = "white"
 
         });
 
@@ -234,7 +238,7 @@ function fetchUserCredits(userId) {
         const inputField = document.getElementById('inputField');
         const responseContainer = document.getElementById('responseContainer');
         let responseState = "respond";
-        var resnum = 0;
+
 
         respondButton.addEventListener('click', async () => {
 
@@ -273,8 +277,8 @@ function fetchUserCredits(userId) {
 
                     let content = "";
                     obj.responses.forEach(response => {
-                      content += `<button class="response" onclick="copyText('response-${resnum}')" id="response-${resnum}">${response}</button><br/>`;
-                      resnum += 1;
+                      content += `<button class="response" onclick="copyText(this)">${response}</button><br/>`;
+
                     });
 
 
