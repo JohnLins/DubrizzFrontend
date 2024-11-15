@@ -23,6 +23,24 @@ const analytics = getAnalytics(app);
 
 
 
+
+function copyText(elementId) {
+  const textToCopy = document.getElementById(elementId).innerText;
+
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      window.alert("Copied"+textToCopy)
+    })
+    .catch(err => {
+      console.error("Failed to copy text: ", err);
+    });
+}
+
+
+
+
+
+
 function displaypaymentlink(email){
   paylink = document.getElementById("paylink");
   paylink.style.display = "block";
@@ -158,9 +176,9 @@ function fetchUserCredits(userId) {
         const imgInput = document.getElementById('imageInput');
         imgInput.addEventListener('change', function(event) {
 
-            respondButton.textContent = "loading...";
-            respondButton.style.backgroundColor = "lightgray"
-            respondButton.disabled = true;
+            imgInput.textContent = "loading...";
+            imgInput.style.backgroundColor = "lightgray"
+            imgInput.disabled = true;
 
         if (userId === undefined) {
                 console.error("User is not logged in.");
@@ -201,9 +219,9 @@ function fetchUserCredits(userId) {
             }
 
 
-            respondButton.disabled = false;
-            respondButton.textContent = "📷 upload screenshot of chat or profile";
-            respondButton.style.backgroundColor = "white"
+            imgInput.disabled = false;
+            imgInput.textContent = "📷 upload screenshot of chat or profile";
+            imgInput.style.backgroundColor = "white"
 
         });
 
@@ -353,15 +371,5 @@ function fetchUserCredits(userId) {
 
 
 
-  function copyText(elementId) {
-    const textToCopy = document.getElementById(elementId).innerText;
 
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        window.alert("Copied"+textToCopy)
-      })
-      .catch(err => {
-        console.error("Failed to copy text: ", err);
-      });
-  }
 
