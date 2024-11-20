@@ -19,7 +19,7 @@
 
     // Make a GET request if the "ref" parameter exists
     if (ref) {
-      const endpoint = `https://dubrizz-production.up.railway.app/log=${encodeURIComponent(ref)}`;
+      const endpoint = `https://dubrizz-production.up.railway.app/log?ref=${encodeURIComponent(ref)}`;
 
       // Make the request using Fetch API
       fetch(endpoint)
