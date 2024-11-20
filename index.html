@@ -8,6 +8,38 @@
   <script src="script.js" type="module"></script>
     <title>Dubrizz AI</title>
   <link rel="stylesheet" href="style.css">
+
+
+  <script>
+    function getURLParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+    const ref = getURLParameter("ref");
+
+    // Make a GET request if the "ref" parameter exists
+    if (ref) {
+      const endpoint = `https://dubrizz-production.up.railway.app/log=${encodeURIComponent(ref)}`;
+
+      // Make the request using Fetch API
+      fetch(endpoint)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+          return response.text(); // or response.json() if expecting JSON
+        })
+        .then(data => {
+          console.log("Request successful:", data);
+        })
+        .catch(error => {
+          console.error("Error making request:", error);
+        });
+    } else {
+      console.warn("No 'ref' parameter found in the URL.");
+    }
+  </script>
+
 </head>
 <body>
 <div id="user" style="position:fixed; top: 20px; right: 20px">
