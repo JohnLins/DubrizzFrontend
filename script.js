@@ -182,6 +182,21 @@ imgLabel.addEventListener('click', () => {
 
 // Handle the file selection
 imgInput.addEventListener('change', function(event) {
+
+
+
+            if (userId === undefined) {
+                console.error("User is not logged in.");
+                signin();
+                imgLabel.textContent = "📷 upload screenshot of chat or profile";
+          imgLabel.style.backgroundColor = "white";
+          imgLabel.style.pointerEvents = "auto";
+            }
+
+
+
+
+  
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
