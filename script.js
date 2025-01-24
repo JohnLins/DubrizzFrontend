@@ -249,6 +249,39 @@ imgInput.addEventListener('change', function(event) {
         let responseState = "respond";
 
 
+
+      ///
+const placeholderResponse = {
+  responses: [
+    "i'll let u finish then",
+    "guess ur in demand",
+    "i knew u were popular",
+    "bet she's busy with me",
+    "tell her her loss",
+    "she'll come back",
+    "lmfao aight lil sis",
+    "oops my calendar might be wrong",
+    "booked n busy huh",
+    "not my prob"
+  ]
+};
+const newResponse = document.createElement('div');
+
+
+let content = "";
+placeholderResponse.responses.forEach(response => {
+  content += `<button class="response" onclick="copyText(this)">${response}</button>`;
+
+});
+newResponse.innerHTML = content;
+
+responseContainer.prepend(newResponse);
+      ///
+
+
+
+
+
         respondButton.addEventListener('click', async () => {
 
             respondButton.textContent = "loading...";
@@ -379,7 +412,6 @@ imgInput.addEventListener('change', function(event) {
             respondButton.textContent = "respond";
             responseState = "respond";
         });
-
 
 
 
