@@ -7,6 +7,7 @@ body {
     margin: 0;
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
+ 
 }
 .container {
     padding: 30px;
@@ -34,12 +35,13 @@ textarea {
     height: 250px;
     resize: vertical;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
 }
 button {
     background-color: white;
     color: lightcoral;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 12px 20px; /* Adjusted padding */
     font-size: 16px;
     cursor: pointer;
@@ -48,19 +50,21 @@ button {
 }
 button:hover {
     background-color: #ffe4e1;
+  
 }
 #respondButton{
 width: 100%;
 }
 .response {
     margin-top: 10px;
+  margin-right: 10px;
     text-align: left;
     float: left;
     padding: 10px 15px;
     border-radius: 18px 18px 18px 0;
     background-color: #007AFF;
     color: white;
-    display: inline-block;
+    display: block;
 }
 
 
@@ -119,7 +123,7 @@ width: 100%;
     color: lightcoral;
     transition: background-color 0.3s;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
