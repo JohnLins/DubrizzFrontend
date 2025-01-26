@@ -265,7 +265,7 @@ const placeholderResponse = {
     "not my prob"
   ]
 };
-const newResponse = document.createElement('div');
+//const newResponse = document.createElement('div');
 
 
 let content = "";
@@ -273,9 +273,10 @@ placeholderResponse.responses.forEach(response => {
   content += `<button class="response" onclick="copyText(this)">${response}</button>`;
 
 });
-newResponse.innerHTML = content;
+//newResponse.innerHTML = content;
+responseContainer.insertAdjacentHTML('afterbegin', content);
 
-responseContainer.prepend(newResponse);
+//responseContainer.prepend(newResponse);
       ///
 
 
@@ -313,7 +314,7 @@ responseContainer.prepend(newResponse);
 
                     const data = await response.json();
 
-                    const newResponse = document.createElement('div');
+                    //const newResponse = document.createElement('div');
                     const obj = JSON.parse(data.response);
 
 
@@ -343,14 +344,15 @@ responseContainer.prepend(newResponse);
 
 
 
-                    newResponse.innerHTML = content;
+                    //newResponse.innerHTML = content;
 
 
 
 
 
                     //newResponse.classList.add('animate');
-                    responseContainer.prepend(newResponse);
+                    //responseContainer.prepend(newResponse);
+                  responseContainer.insertAdjacentHTML('afterbegin', content);
 
 
 
@@ -366,7 +368,7 @@ responseContainer.prepend(newResponse);
 
                     //fallbackResponse.classList.add('animate');
                     responseContainer.prepend(fallbackResponse);
-                    const newResponse = document.createElement('div');
+                    //const newResponse = document.createElement('div');
                     if(document.getElementById("credits").innerHTML.substring(0, 20) == `u ran out of credits`){
                         newResponse.innerHTML = `<div class="error">Get more credits with <a href="`+document.getElementById("paylink").href+`">pro</a></div>`;
                     }else {
@@ -374,7 +376,8 @@ responseContainer.prepend(newResponse);
                     }
 
                     //newResponse.classList.add('animate');
-                    responseContainer.prepend(newResponse);
+                    //responseContainer.prepend(newResponse);
+                    responseContainer.insertAdjacentHTML('afterbegin', content);
                     respondButton.disabled = false;
                     respondButton.textContent = "again";
                     respondButton.style.backgroundColor = "white"
