@@ -349,7 +349,7 @@ responseContainer.prepend(newResponse);
 
 
 
-                    newResponse.classList.add('animate');
+                    //newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
 
 
@@ -364,7 +364,7 @@ responseContainer.prepend(newResponse);
 
                     const fallbackResponse = document.createElement('div');
 
-                    fallbackResponse.classList.add('animate');
+                    //fallbackResponse.classList.add('animate');
                     responseContainer.prepend(fallbackResponse);
                     const newResponse = document.createElement('div');
                     if(document.getElementById("credits").innerHTML.substring(0, 20) == `u ran out of credits`){
@@ -373,7 +373,7 @@ responseContainer.prepend(newResponse);
                         newResponse.innerHTML = '<div class="error">Error! Rephrase and try again</div>';
                     }
 
-                    newResponse.classList.add('animate');
+                    //newResponse.classList.add('animate');
                     responseContainer.prepend(newResponse);
                     respondButton.disabled = false;
                     respondButton.textContent = "again";
