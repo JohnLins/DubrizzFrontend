@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advice App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+     
+      width: 600px;
+      text-align: center;
+    }
+    .button {
+      background-color: lightcoral;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: coral;
+    }
+    .textbox {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    .response {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .response div {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .response h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: lightcoral;
+    }
+    .response ul {
+      text-align: left;
+      list-style: none;
+      padding-left: 20px;
+    }
+    .response ul li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>your non-delusional friend (with rizz)</h2>
+  <textarea class="textbox" id="storyInput" placeholder="Describe your story here..." rows="5"></textarea>
+  <br>
+  <button class="button" onclick="getAdvice()">Get Advice</button>
+  
+  <div class="response" id="responseBlock"></div>
+</div>
+
+<script>
+  async function getAdvice() {
+    const story = document.getElementById("storyInput").value;
+    if (!story) {
+      alert("Please enter a story!");
+      return;
+    }
+
+    const apiUrl = `https://dubrizz-production.up.railway.app/advice?history=${encodeURIComponent(story)}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      displayAdvice(data);
+    } catch (error) {
+      console.error("Error fetching advice:", error);
+      alert("There was an issue with the API request.");
+    }
+  }
+
+  function displayAdvice(data) {
+    const responseBlock = document.getElementById("responseBlock");
+    responseBlock.innerHTML = ""; // Clear previous response
+
+    // Sumother section
+    const sumotherDiv = document.createElement("div");
+    sumotherDiv.innerHTML = `<h3>Summary</h3><p>${data.sumother}</p>`;
+    responseBlock.appendChild(sumotherDiv);
+
+    // Why section
+    if (data.why && data.why.length > 0) {
+      const whyDiv = document.createElement("div");
+      whyDiv.innerHTML = "<h3>Why?</h3><ul>" + data.why.map(item => `<li>${item}</li>`).join('') + "</ul>";
+      responseBlock.appendChild(whyDiv);
+    }
+
+    // Do section
+    if (data.do && data.do.length > 0) {
+      const doDiv = document.createElement("div");
+      doDiv.innerHTML = "<h3>What to Do?</h3><ul>" + data.do.map(item => `<li>${item}</li>`).join('') + "</ul>";
+      responseBlock.appendChild(doDiv);
+    }
+  }
+</script>
+
+</body>
+</html>
