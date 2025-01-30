@@ -16,7 +16,7 @@
       background-color: #fff;
       border-radius: 20px;
       padding: 20px;
-      width: 700px;
+      width: 90%;
       text-align: center;
       margin: 50px auto 0; /* Center horizontally, with space from the top */
     }
@@ -40,17 +40,19 @@
     .textbox {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
+      height: 200px;
+      margin-bottom: 40px;
       border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 14px;
+      box-shadow: 0px 0px 15px lightgray;
+      border:0;
+      font-size: 15px;
     }
     .response {
       margin-top: 20px;
       font-size: 16px;
     }
     .response div {
-      background-color: #f9f9f9;
+      background-color: #ffe4e1;
       padding: 10px;
       border-radius: 10px;
       margin: 10px 0;
@@ -62,7 +64,7 @@
     }
     .response ul {
       text-align: left;
-      list-style: none;
+      
       padding-left: 20px;
     }
     .response ul li {
@@ -73,7 +75,7 @@
 <body>
 
 <div class="container">
-  <h2>talk to your nonchalant non-delusional friend with (with rizz)</h2>
+  <h2>talk to your nonchalant nondelusional bestie (with rizz)</h2>
   <textarea class="textbox" id="storyInput" placeholder="okay bestie, explain the situation here..." rows="5"></textarea>
   <br>
   <button class="button" id="adviceButton" onclick="getAdvice()">Get Advice</button>
