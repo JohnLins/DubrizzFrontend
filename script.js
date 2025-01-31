@@ -284,7 +284,7 @@ her: she busy little bro`],
 }, `me: hey princess I love you!
 her: she busy little bro`]]
 
-r = placeholders[Math.floor(Math.random() * placeholders.length)]
+let r = placeholders[Math.floor(Math.random() * placeholders.length)]
 
 document.getElementById("inputField").innerText = r[1];
 
