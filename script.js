@@ -382,7 +382,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
 
                     respondButton.disabled = false;
                     respondButton.textContent = "again";
-                    respondButton.style.backgroundColor = "white"
+                    respondButton.style.backgroundColor = "lightcoral"
                 } catch (error) {
                     console.error('Error fetching the response:', error);
 
@@ -404,7 +404,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
                     responseContainer.insertAdjacentHTML('afterbegin', content);
                     respondButton.disabled = false;
                     respondButton.textContent = "again";
-                    respondButton.style.backgroundColor = "white"
+                    respondButton.style.backgroundColor = "lightcoral"
 
 
 
