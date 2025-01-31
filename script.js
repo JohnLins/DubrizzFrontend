@@ -266,20 +266,19 @@ let placeholders = [[{
     "booked n busy huh",
     "not my prob"
   ]
-}, `me: hey princess I love you!\n
-her: she busy little bro`],
+}, "me: hey princess I love you!\nher: she busy little bro"],
 [{
   responses: [
     "who said i'm ur bae",
     "will u feed me",
     "my schedule's tight",
     "under one condition",
-    "tell her her loss",
-    "she'll come back",
+    "don't say it unless u mean it",
+    "those feet still cold at night",
     "lmfao aight lil sis",
-    "oops my calendar might be wrong",
-    "booked n busy huh",
-    "not my prob"
+    "keepin it lowkey tonight",
+    "aight let me get my helmet",
+    "ok"
   ]
 }, `her: come over bae`],
 [{
@@ -295,9 +294,7 @@ her: she busy little bro`],
     "let's not label it",
     "define relationship lol"
   ]
-}, `her: what are we?\n
-me: why do you ask\n
-her: it feels like we are in a relationship but we never had the convo`],
+}, "her: what are we?\nme: why do you ask\nher: it feels like we are in a relationship but we never had the convo"],
  [{
   responses: [
     "milf magnet sorry",
