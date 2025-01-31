@@ -270,10 +270,10 @@ let placeholders = [[{
 her: she busy little bro`],
 [{
   responses: [
-    "i'll let u finish then2",
-    "guess ur in demand",
-    "i knew u were popular",
-    "bet she's busy with me",
+    "who said i'm ur bae",
+    "will u feed me",
+    "my schedule's tight",
+    "under one condition",
     "tell her her loss",
     "she'll come back",
     "lmfao aight lil sis",
@@ -281,8 +281,37 @@ her: she busy little bro`],
     "booked n busy huh",
     "not my prob"
   ]
-}, `me: hey princess I love you!
-her: she busy little bro`]]
+}, `her: come over bae`],
+[{
+  responses: [
+    "told u I have amnesia",
+    "its all about perspective",
+    "why u so curious",
+    "who's asking",
+    "i'll think abt it",
+    "guess ur stuck with me",
+    "oh we r somethin",
+    "u been catchin feelings huh",
+    "let's not label it",
+    "define relationship lol"
+  ]
+}, `her: what are we?
+me: why do you ask
+her: it feels like we are in a relationship but we never had the convo`],
+ [{
+  responses: [
+    "milf magnet sorry",
+    "idk she was feelin me",
+    "ur mom calls me",
+    "bc she's hot af",
+    "pls don't be mad princess",
+    "ur moms my type",
+    "was practicing my lines",
+    "keeping it in the fam",
+    "she's cuter than u tbh",
+    "needed a backup plan"
+  ]
+}, `her: why were you flirting with my mom?`]]
 
 let r = placeholders[Math.floor(Math.random() * placeholders.length)]
 
