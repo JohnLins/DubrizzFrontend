@@ -266,7 +266,7 @@ let placeholders = [[{
     "booked n busy huh",
     "not my prob"
   ]
-}, `me: hey princess I love you!
+}, `me: hey princess I love you!\n
 her: she busy little bro`],
 [{
   responses: [
@@ -295,8 +295,8 @@ her: she busy little bro`],
     "let's not label it",
     "define relationship lol"
   ]
-}, `her: what are we?
-me: why do you ask
+}, `her: what are we?\n
+me: why do you ask\n
 her: it feels like we are in a relationship but we never had the convo`],
  [{
   responses: [
