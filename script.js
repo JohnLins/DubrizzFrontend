@@ -312,7 +312,7 @@ let placeholders = [[{
 
 let r = placeholders[Math.floor(Math.random() * placeholders.length)]
 
-document.getElementById("inputField").innerText = r[1];
+document.getElementById("inputField").innerHTML= r[1];
 
 const placeholderResponse = r[0];
 //const newResponse = document.createElement('div');
