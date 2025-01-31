@@ -253,7 +253,7 @@ imgInput.addEventListener('change', function(event) {
       ///
 
 
-placeholders = [[{
+let placeholders = [[{
   responses: [
     "i'll let u finish then",
     "guess ur in demand",
