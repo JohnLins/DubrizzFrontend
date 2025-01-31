@@ -107,7 +107,7 @@ onAuthStateChanged(auth, (user) => {
     googleLoginBtn.style.display = 'none';
 
     const userNameSpan = document.getElementById('username');
-    userNameSpan.innerHTML = userName.split(" ")[0] + `<br/><a href="privacy.md" style="font-size: 0.7em; color: lightgray">Privacy Policy</a>`;
+    userNameSpan.innerHTML = `hey `+userName.split(" ")[0]+`!`;// + `<br/><a href="privacy.md" style="font-size: 0.7em; color: lightgray">Privacy Policy</a>`;
 
     displaypaymentlink(user.email);
 
