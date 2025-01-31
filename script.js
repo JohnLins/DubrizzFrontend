@@ -251,7 +251,9 @@ imgInput.addEventListener('change', function(event) {
 
 
       ///
-const placeholderResponse = {
+
+
+placeholders = [[{
   responses: [
     "i'll let u finish then",
     "guess ur in demand",
@@ -264,7 +266,29 @@ const placeholderResponse = {
     "booked n busy huh",
     "not my prob"
   ]
-};
+}, `me: hey princess I love you!
+her: she busy little bro`],
+[{
+  responses: [
+    "i'll let u finish then2",
+    "guess ur in demand",
+    "i knew u were popular",
+    "bet she's busy with me",
+    "tell her her loss",
+    "she'll come back",
+    "lmfao aight lil sis",
+    "oops my calendar might be wrong",
+    "booked n busy huh",
+    "not my prob"
+  ]
+}, `me: hey princess I love you!
+her: she busy little bro`]]
+
+r = placeholders[Math.floor(Math.random() * array.length)]
+
+document.getElementById("inputField").innerText = r[1];
+
+const placeholderResponse = r[0];
 //const newResponse = document.createElement('div');
 
 
