@@ -68,7 +68,7 @@
 </div>
 
 <div id="user" style="position:fixed; top: 20px; left: 20px">
-<a href="" style="display:none" id="paylink" class="ᡣ𐭩">Pro Plan $2/week</a>
+<a href="" style="display:none" id="paylink" class="pay">Pro Plan $2/week</a>
 
 </div>
 
@@ -80,6 +80,65 @@
     <div class="container">
     <img src="dubrizz.png" height="60px" style="margin-bottom: -50px"/>
         <h1>Dubrizz AI</h1>
+
+
+         <style>
+        .selector-bar {
+            display: flex;
+            width: 100%;
+            background-color: #ffe4e1;
+            padding: 5px;
+            border-radius: 15px;
+          margin:0;
+          font-weight: bold;
+        }
+        .side {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 13px;
+          margin: 10px;
+          background-color: #ffe4e1;
+          box-shadow: 0px 0px 5px lightcoral;
+          color: lightcoral;
+        }
+        .selected {
+            background-color: lightcoral;
+          color: white;
+        }
+    </style>
+
+    <div class="selector-bar">
+        <div id="left" class="side selected">Response Generator</div>
+        <div id="right" class="side">Situationship Advice</div>
+    </div>
+
+    <script>
+        let currentSide = 'right';
+        
+        document.getElementById('left').addEventListener('click', function() {
+            if (currentSide !== 'left') {
+                document.getElementById('left').classList.add('selected');
+                document.getElementById('right').classList.remove('selected');
+                currentSide = 'left';
+                alert('left side');
+            }
+        });
+        
+        document.getElementById('right').addEventListener('click', function() {
+            if (currentSide !== 'right') {
+                document.getElementById('right').classList.add('selected');
+                document.getElementById('left').classList.remove('selected');
+                currentSide = 'right';
+                alert('right side');
+            }
+        });
+    </script>
+
+
+        
         <h4 style="font-weight:100">nonchalant responses • paste convo below</h4>
         <textarea id="inputField">me: hey princess I love you!
 her: she busy little bro</textarea>
