@@ -294,7 +294,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
                 signin();
                 respondButton.disabled = false;
                 respondButton.textContent = "again";
-                respondButton.style.backgroundColor = "white"
+                respondButton.style.backgroundColor = "lightgray"
             }
 
 
