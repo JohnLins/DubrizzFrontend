@@ -201,6 +201,11 @@
             const adbutton = document.getElementById("adviceButton");
             const responseBlock = document.getElementById("responseBlock");
 
+            if window.userId == undefined {
+              alert("Please sign in first");
+              return;
+            }
+
             if (!story) {
               alert("Please enter a story!");
               return;
