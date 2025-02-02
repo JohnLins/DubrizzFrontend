@@ -347,8 +347,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
                 console.error("User is not logged in.");
                 signin();
                 respondButton.disabled = false;
-                respondButton.textContent = "again";
-                respondButton.style.backgroundColor = "lightgray"
+                
             }
 
 
