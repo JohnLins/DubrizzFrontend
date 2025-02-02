@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-let userId;
+window.userId = undefined;
+window.character = "nonchalant";
 let userName;
 // Firebase configuration
 const firebaseConfig = {
@@ -40,6 +41,9 @@ window.copyText = function(button) {
 
 
 
+
+
+
 function displaypaymentlink(email){
   paylink = document.getElementById("paylink");
   paylink.style.display = "block";
@@ -56,7 +60,7 @@ function signin() {
     })
     .then((result) => {
       const user = result.user;
-      userId = user.uid;
+      window.userId = user.uid;
       userName = user.displayName;
 
       const userDiv = document.getElementById('user');
@@ -76,7 +80,7 @@ function signin() {
                   },
                   body: JSON.stringify({
       
-                    uid: userId
+                    uid: window.userId
                   }),
                 })
                   .then(response => response.json())
@@ -99,7 +103,7 @@ function signin() {
 // Detect and display user on page load if they're already signed in
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    userId = user.uid;
+    window.userId = user.uid;
     userName = user.displayName;
 
     const userDiv = document.getElementById('user');
@@ -185,7 +189,7 @@ imgInput.addEventListener('change', function(event) {
 
 
 
-            if (userId === undefined) {
+            if (window.userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
                 imgLabel.textContent = "📷 upload screenshot of chat or profile";
@@ -208,7 +212,7 @@ imgInput.addEventListener('change', function(event) {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ base: base64String, id: userId })
+        body: JSON.stringify({ base: base64String, id: window.userId })
       })
         .then(response => response.json())
         .then(d => {
@@ -339,7 +343,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
             respondButton.style.backgroundColor = "lightgray"
             respondButton.disabled = true;
 
-            if (userId === undefined) {
+            if (window.userId === undefined) {
                 console.error("User is not logged in.");
                 signin();
                 respondButton.disabled = false;
@@ -352,7 +356,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
 
             if (history != "") {
                 try {
-                    const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(userId)}`);
+                    const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(window.userId)}&tone=${encodeURIComponent(window.character)}`);
 
 
 
@@ -468,6 +472,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
 
 
 
+//////////////
 
 
 

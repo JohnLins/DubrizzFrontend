@@ -81,16 +81,17 @@
     <img src="dubrizz.png" height="60px" style="margin-bottom: -50px"/>
         <h1>Dubrizz AI</h1>
 
-<!--
+<!---->
          <style>
         .selector-bar {
             display: flex;
             width: 100%;
             background-color: #ffe4e1;
-            padding: 5px;
+
             border-radius: 15px;
           margin:0;
           font-weight: bold;
+          font-size: .7em;
         }
         .side {
             flex: 1;
@@ -116,14 +117,15 @@
     </div>
 
     <script>
-        let currentSide = 'right';
+        let currentSide = 'left';
         
         document.getElementById('left').addEventListener('click', function() {
             if (currentSide !== 'left') {
                 document.getElementById('left').classList.add('selected');
                 document.getElementById('right').classList.remove('selected');
                 currentSide = 'left';
-                alert('left side');
+                document.getElementById("response-generator").style.display = "block";
+                document.getElementById("situationship-advice").style.display = "none";
             }
         });
         
@@ -132,29 +134,139 @@
                 document.getElementById('right').classList.add('selected');
                 document.getElementById('left').classList.remove('selected');
                 currentSide = 'right';
-                alert('right side');
+                 document.getElementById("response-generator").style.display = "none";
+                document.getElementById("situationship-advice").style.display = "block";
             }
         });
     </script>
--->
+<!---->
 
+
+        <div id="response-generator">
         
-        <h4 style="font-weight:100">nonchalant responses • paste convo below</h4>
-        <textarea id="inputField" placeholder="paste the conversation history here"></textarea>
-        <br/>
-        
-        <b>
-        <label for="imageInput" class="custom-file-upload" id="imglabel">
-        📷 upload screenshot of chat or profile
-        </label>
-        </b>
-        <input type="file" id="imageInput" accept="image/*">
-        <br/>
-        <span id="credits" ></span><br/>
-        <b>
-        <button id="respondButton">respond ᡣ𐭩</button>
-        </b>
-        <div id="responseContainer" ></div>
+          <h4 style="font-weight:100;color:lightcoral"">paste convo or upload screenshot below</h4>
+          <textarea id="inputField" placeholder="paste the conversation history here"></textarea>
+          <br/>
+
+          <b>
+          <label for="imageInput" class="custom-file-upload" id="imglabel">
+          📷 upload screenshot of chat or profile
+          </label>
+          </b>
+          <input type="file" id="imageInput" accept="image/*">
+          <br/>
+          <span id="credits" ></span><br/>
+          <b>
+
+          <!----->
+            <div class="segmented-button">
+          <div class="segment char-selected" onclick="selectCharacter(this, 'nonchalant')">😐 nonchalant</div>
+          <div class="segment" onclick="selectCharacter(this, 'dirty')">😈 dirty</div>
+          <div class="segment" onclick="selectCharacter(this, 'chalant')">😌 chalant</div>
+      </div>
+
+      <script>
+
+          function selectCharacter(element, selectedCharacter) {
+              document.querySelectorAll('.segment').forEach(seg => seg.classList.remove('char-selected'));
+              element.classList.add('char-selected');
+              window.character = selectedCharacter;
+              console.log("Selected character:", character);
+          }
+      </script>
+            <!----->
+
+
+          <button id="respondButton">respond ᡣ𐭩</button>
+          </b>
+          <div id="responseContainer" ></div>
+
+      </div>
+
+      <div id="situationship-advice" style="display:none">
+
+         <h4 style="font-weight:100; color:lightcoral">your nonchalant nondelusional bestie (with rizz)</h4>
+          <textarea class="textbox" id="storyInput" placeholder="okay bestie, explain the situation about that boy/girl here... (use voice type on your keyboard if it's a long story)" rows="5" style="height: 200px;"></textarea>
+          <br>
+          <button class="button" id="adviceButton" onclick="getAdvice()">Get Advice</button>
+
+          <div class="sit-response" id="responseBlock"></div>
+        </div>
+        </center>
+        <script>
+
+
+          async function getAdvice() {
+            const story = document.getElementById("storyInput").value;
+            const adbutton = document.getElementById("adviceButton");
+            const responseBlock = document.getElementById("responseBlock");
+
+            if (!story) {
+              alert("Please enter a story!");
+              return;
+            }
+
+            // Change button text to "Loading..." while fetching data
+            adbutton.innerHTML = "deeping thinking... <br/> (this takes 1 minute)";
+            adbutton.disabled = true;
+            adbutton.style.backgroundColor = "gray";
+
+            const apiUrl = `https://dubrizz-production.up.railway.app/advice?history=${encodeURIComponent(story)}&id=${encodeURIComponent(window.userId)}`;
+
+            try {
+              const response = await fetch(apiUrl);
+
+              // Check if the response is successful
+              if (!response.ok) {
+                throw new Error(`API request failed with status: ${response.status}`);
+              }
+
+              const data = await response.json();
+              const parsedData = JSON.parse(data.response);  // Parse the "response" field
+
+              console.log("Parsed API Response:", parsedData);  // Log the parsed response for debugging
+              displayAdvice(parsedData);
+            } catch (error) {
+              console.error("Error fetching advice:", error);
+              alert("There was an issue with the API request.");
+            } finally {
+              // Reset the button text after the API call finishes
+              adbutton.innerHTML = "Get Advice";
+              adbutton.disabled = false;
+               adbutton.style.backgroundColor = "lightcoral";
+            }
+          }
+
+          function displayAdvice(data) {
+            const responseBlock = document.getElementById("responseBlock");
+            responseBlock.innerHTML = ""; // Clear previous response
+
+            if (!data || !data.sumother || !data.why || !data.do) {
+              responseBlock.innerHTML = "<p>No advice available for the given input. Please try again.</p>";
+              return;
+            }
+
+            // Sumother section
+            const sumotherDiv = document.createElement("div");
+            sumotherDiv.innerHTML = `<h3>Summary</h3><p>${data.sumother}</p>`;
+            responseBlock.appendChild(sumotherDiv);
+
+            // Why section
+            if (data.why && data.why.length > 0) {
+              const whyDiv = document.createElement("div");
+              whyDiv.innerHTML = "<h3>Why?</h3><ul>" + data.why.map(item => `<li>${item}</li>`).join('') + "</ul>";
+              responseBlock.appendChild(whyDiv);
+            }
+
+            // Do section
+            if (data.do && data.do.length > 0) {
+              const doDiv = document.createElement("div");
+              doDiv.innerHTML = "<h3>What to Do?</h3><ul>" + data.do.map(item => `<li>${item}</li>`).join('') + "</ul>";
+              responseBlock.appendChild(doDiv);
+            }
+          }
+        </script>
+      </div>
 
 
 </center>

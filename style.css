@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&display=swap');
 body {
     height: 100vh;
     margin: 0;
@@ -9,9 +9,9 @@ body {
 .container {
     padding: 30px;
     text-align: center;
-    width: 90%;
+    width: 80%;
     max-width: 600px;
-    margin-top: 45px;
+    margin-top: 20px;
 }
 
 #credits {
@@ -45,7 +45,7 @@ textarea {
     margin-bottom: 15px;
     font-size: 18px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 200px;
+    height: 110px;
     resize: vertical;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   
@@ -68,6 +68,8 @@ button:hover {
 }
 #respondButton{
 width: 100%;
+border-top-right-radius: 0px;
+border-top-left-radius: 0px;
 }
 #responseContainer {
     max-height: 500px;
@@ -88,7 +90,7 @@ width: 100%;
     background-color: #007AFF;
     color: white;
     
-    margin: 3px; /* Add spacing between buttons */
+
     white-space: nowrap; /* Prevent line breaks within the button */
     float: left;
     animation: pop 0.3s ease-in-out;
@@ -131,9 +133,10 @@ width: 100%;
 
 
 
-    .custom-file-upload {
+.custom-file-upload {
     display: inline-block;
-    padding: 10px 20px;
+    width: 100%;
+    padding: 10px 0px;
     cursor: pointer;
     background-color: white;
     color: lightcoral;
@@ -142,6 +145,7 @@ width: 100%;
     border-radius: 15px;
     font-size: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .custom-file-upload:hover {
@@ -263,3 +267,67 @@ width: 100%;
   background-color: #303030;
   opacity: 8%;
 }
+
+
+
+
+/****************/
+    .segmented-button {
+            display: flex;
+            color:lightcoral;
+            border-radius: 8px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 2px;
+            font-size: .8em;
+        }
+        .segment {
+            flex: 1;
+            padding: 4px;
+            text-align: center;
+            cursor: pointer;
+            background: #ffe4e1;
+            transition: background 0.3s;
+        }
+        .segment:not(:last-child) {
+            border-right: 1px solid white;
+        }
+        .segment.char-selected {
+            background: lightcoral;
+            color: white;
+        }
+
+
+/**********/
+
+
+#situationship-advice {
+  font-family: "Shadows Into Light";
+}
+.sit-response {
+  margin-top: 20px;
+  font-size: 20px;
+}
+.sit-response div {
+  background-color: #ffe4e1;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.sit-response h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: lightcoral;
+}
+.sit-response ul {
+  text-align: left;
+
+  padding-left: 20px;
+}
+.sit-response ul li {
+  margin-bottom: 8px;
+}
+
+
