@@ -259,7 +259,7 @@ imgInput.addEventListener('change', function(event) {
 
 let placeholders = [[{
   responses: [
-    "i'll let u finish then",
+    "she single now",
     "guess ur in demand",
     "i knew u were popular",
     "bet she's busy with me",
