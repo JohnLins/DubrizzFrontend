@@ -291,7 +291,7 @@ let placeholders = [[{
     "its all about perspective",
     "why u so curious",
     "who's asking",
-    "i'll think abt it",
+    "maybe we nothing",
     "guess ur stuck with me",
     "oh we r somethin",
     "u been catchin feelings huh",
