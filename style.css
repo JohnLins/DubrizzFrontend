@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');        
+* {
+            font-family: "Montserrat", serif;
+}
+
 body {
     height: 100vh;
     margin: 0;
     background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
  
 }
 .container {
@@ -89,9 +93,8 @@ border-top-left-radius: 0px;
     border-radius: 18px 18px 18px 0;
     background-color: #007AFF;
     color: white;
-    
-
-    white-space: nowrap; /* Prevent line breaks within the button */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     float: left;
     animation: pop 0.3s ease-in-out;
 }
@@ -312,7 +315,7 @@ border-top-left-radius: 0px;
 }
 .sit-response div {
   background-color: #ffe4e1;
-  padding: 10px;
+  padding: 30px;
   border-radius: 10px;
   margin: 10px 0;
 }
