@@ -216,7 +216,7 @@
             adbutton.disabled = true;
             adbutton.style.backgroundColor = "gray";
 
-            const apiUrl = `https://dubrizz-production.up.railway.app/advice?history=${encodeURIComponent(story)}&id=${encodeURIComponent(window.userId)}`;
+            const apiUrl = `https://api.dubrizz.com/advice?history=${encodeURIComponent(story)}&id=${encodeURIComponent(window.userId)}`;
 
             try {
               const response = await fetch(apiUrl);
