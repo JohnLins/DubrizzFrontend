@@ -151,7 +151,7 @@ googleLogin.addEventListener("click", function() {
 
 
 function fetchUserCredits(userId) {
-  const url = `https://dubrizz-production.up.railway.app/credits?uid=${encodeURIComponent(userId)}`;
+  const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(userId)}`;
 
   fetch(url)
     .then(response => response.json())
@@ -207,7 +207,7 @@ imgInput.addEventListener('change', function(event) {
     reader.onload = function(e) {
       const base64String = e.target.result.split(',')[1]; // Get only the base64 part
 
-      fetch('https://dubrizz-production.up.railway.app/ss', {
+      fetch('https://api.dubrizz.com/ss', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -356,7 +356,7 @@ responseContainer.insertAdjacentHTML('afterbegin', content);
 
             if (history != "") {
                 try {
-                    const response = await fetch(`https://dubrizz-production.up.railway.app/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(window.userId)}&tone=${encodeURIComponent(window.character)}`);
+                    const response = await fetch(`https://api.dubrizz.com/rizz?history=${encodeURIComponent(history)}&id=${encodeURIComponent(window.userId)}&tone=${encodeURIComponent(window.character)}`);
 
 
 
