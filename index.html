@@ -198,6 +198,30 @@
 
 
           async function getAdvice() {
+
+
+
+            //////////FETCH USER CREDITS//////////
+                try {
+                    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+            
+                    if (data.credits !== undefined) {
+                        if (data.credits == 0) {
+                            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
+                            return; // This now correctly exits getAdvice()
+                        } else {
+                            document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching credits:", error);
+                    return;
+                }
+              //////////////////
+
+              
             const story = document.getElementById("storyInput").value;
             const adbutton = document.getElementById("adviceButton");
             const responseBlock = document.getElementById("responseBlock");
@@ -273,27 +297,7 @@
 
               
 
-            //////////FETCH USER CREDITS//////////
-                const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
-
-              fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                  if (data.credits !== undefined) {
-                    if(data.credits == 0){
-                      document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="`+document.getElementById("paylink").href+`">pro</a>`
-                    }
-                    else {
-                      document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`
-                    }
-                  } else {
-                    window.alert(`Error: ${data.error}`);
-                  }
-                })
-                .catch(error => {
-                  window.alert(`Error fetching credits: ${error.message}`);
-                });
-              //////////////////
+            
 
 
 
