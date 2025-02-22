@@ -271,7 +271,33 @@
               responseBlock.appendChild(doDiv);
             }
 
-              fetchUserCredits(window.userId);
+              
+
+            //////////FETCH USER CREDITS//////////
+                const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
+
+              fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.credits !== undefined) {
+                    if(data.credits == 0){
+                      document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="`+document.getElementById("paylink").href+`">pro</a>`
+                    }
+                    else {
+                      document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`
+                    }
+                  } else {
+                    window.alert(`Error: ${data.error}`);
+                  }
+                })
+                .catch(error => {
+                  window.alert(`Error fetching credits: ${error.message}`);
+                });
+              //////////////////
+
+
+
+              
           }
         </script>
       </div>
