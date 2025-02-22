@@ -189,7 +189,8 @@
           <textarea class="textbox" id="storyInput" placeholder="okay bestie, explain the situation about that boy/girl here... (use voice type on your keyboard if it's a long story)" rows="5" style="height: 200px;"></textarea>
           <br>
           <button class="button" id="adviceButton" onclick="getAdvice()">Get Advice</button>
-
+            <br/>
+          <span id="credits" ></span><br/>
           <div class="sit-response" id="responseBlock"></div>
         </div>
         </center>
@@ -269,6 +270,8 @@
               doDiv.innerHTML = "<h3>What to Do?</h3><ul>" + data.do.map(item => `<li>${item}</li>`).join('') + "</ul>";
               responseBlock.appendChild(doDiv);
             }
+
+              fetchUserCredits(window.userId);
           }
         </script>
       </div>
