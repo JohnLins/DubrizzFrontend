@@ -201,25 +201,7 @@
 
 
 
-            //////////FETCH USER CREDITS//////////
-                try {
-                    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
-                    const response = await fetch(url);
-                    const data = await response.json();
-            
-                    if (data.credits !== undefined) {
-                        if (data.credits == 0) {
-                            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
-                            return; // This now correctly exits getAdvice()
-                        } else {
-                            document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error fetching credits:", error);
-                    return;
-                }
-              //////////////////
+
 
               
             const story = document.getElementById("storyInput").value;
@@ -240,6 +222,36 @@
             adbutton.innerHTML = "deeping thinking... <br/> (this takes 1 minute)";
             adbutton.disabled = true;
             adbutton.style.backgroundColor = "gray";
+
+
+
+
+
+                        //////////FETCH USER CREDITS//////////
+                try {
+                    console.log("checking credits");
+                    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+            
+                    if (data.credits !== undefined) {
+                        if (data.credits == 0) {
+                            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
+                            return; // This now correctly exits getAdvice()
+                        } else {
+                            document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching credits:", error);
+                    return;
+                }
+              //////////////////
+            console.log("done checking credits");
+
+
+
+              
 
             const apiUrl = `https://api.dubrizz.com/advice?history=${encodeURIComponent(story)}&id=${encodeURIComponent(window.userId)}`;
 
