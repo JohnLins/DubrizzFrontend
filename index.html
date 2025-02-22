@@ -190,7 +190,7 @@
           <br>
           <button class="button" id="adviceButton" onclick="getAdvice()">Get Advice</button>
             <br/>
-          <span id="credits" ></span><br/>
+          <span id="credits2" ></span><br/>
           <div class="sit-response" id="responseBlock"></div>
         </div>
         </center>
@@ -241,7 +241,10 @@
 
     if (data.credits !== undefined) {
         if (data.credits == 0) {
-            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
+            document.getElementById("credits2").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
+            adbutton.innerHTML = "Get Advice";
+              adbutton.disabled = false;
+               adbutton.style.backgroundColor = "lightcoral";
             return;
         } else {
             document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
