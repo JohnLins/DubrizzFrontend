@@ -229,23 +229,29 @@
 
                         //////////FETCH USER CREDITS//////////
                 try {
-                    console.log("checking credits");
-                    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
-                    const response = await fetch(url);
-                    const data = await response.json();
-            
-                    if (data.credits !== undefined) {
-                        if (data.credits == 0) {
-                            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
-                            return; // This now correctly exits getAdvice()
-                        } else {
-                            document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
-                        }
-                    }
-                } catch (error) {
-                    console.error("Error fetching credits:", error);
-                    return;
-                }
+    console.log("checking credits");
+    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
+    console.log("Fetching credits from:", url);
+    
+    const response = await fetch(url);
+    console.log("Response received:", response);
+
+    const data = await response.json();
+    console.log("Credits data:", data);
+
+    if (data.credits !== undefined) {
+        if (data.credits == 0) {
+            document.getElementById("credits").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
+            return;
+        } else {
+            document.getElementById("credits").innerHTML = `credits remaining: <b>${data.credits}</b>`;
+        }
+    }
+} catch (error) {
+    console.error("Error fetching credits:", error);
+}
+console.log("done checking credits");
+
               //////////////////
             console.log("done checking credits");
 
