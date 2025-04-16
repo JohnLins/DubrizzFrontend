@@ -262,10 +262,20 @@ console.log("done checking credits");
 
               
 
-            const apiUrl = `https://api.dubrizz.com/advice?history=${encodeURIComponent(story)}&id=${encodeURIComponent(window.userId)}`;
-
+         
             try {
-              const response = await fetch(apiUrl);
+              const apiUrl = `https://api.dubrizz.com/advice`;
+
+                const response = await fetch(apiUrl, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    history: story,
+                    id: window.userId,
+                  }),
+                });
 
               // Check if the response is successful
               if (!response.ok) {
