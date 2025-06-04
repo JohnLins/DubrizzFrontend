@@ -9,7 +9,6 @@
     <title>Dubrizz AI</title>
   <link rel="stylesheet" href="style.css">
 
-
   <script>
     function getURLParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -45,7 +44,6 @@
 <div id="user" style="position:fixed; top: 20px; right: 20px">
 <span id="username"></span>
 
-
     <button id="google-login-btn">
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">
@@ -62,317 +60,135 @@
         <span style="display: none;">Sign in with Google</span>
       </div>
     </button>
-
-
-
 </div>
 
 <div id="user" style="position:fixed; top: 20px; left: 20px">
 <a href="" style="display:none" id="paylink" class="pay">Pro Plan $2/week</a>
-
 </div>
-
-
-
-
 
 <center>
     <div class="container">
     <img src="dubrizz.png" height="60px" style="margin-bottom: -50px"/>
-        <h1>Dubrizz AI</h1>
+        <h1>nonchalant situationship advice (scientific)</h1>
 
-<!---->
-         <style>
-        .selector-bar {
-            display: flex;
-            width: 100%;
-            background-color: #ffe4e1;
-
-            border-radius: 15px;
-          margin:0;
-          font-weight: bold;
-          font-size: .7em;
-        }
-        .side {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-            background-color: white;
-            border-radius: 13px;
-          margin: 10px;
-          background-color: #ffe4e1;
-          box-shadow: 0px 0px 5px lightcoral;
-          color: lightcoral;
-        }
-        .selected {
-            background-color: lightcoral;
-          color: white;
-        }
-    </style>
-
-    <div class="selector-bar">
-        <div id="left" class="side selected">Response Generator</div>
-        <div id="right" class="side">Situationship Advice</div>
-    </div>
-
-    <script>
-        let currentSide = 'left';
-        
-        document.getElementById('left').addEventListener('click', function() {
-            if (currentSide !== 'left') {
-                document.getElementById('left').classList.add('selected');
-                document.getElementById('right').classList.remove('selected');
-                currentSide = 'left';
-                document.getElementById("response-generator").style.display = "block";
-                document.getElementById("situationship-advice").style.display = "none";
-            }
-        });
-        
-        document.getElementById('right').addEventListener('click', function() {
-            if (currentSide !== 'right') {
-                document.getElementById('right').classList.add('selected');
-                document.getElementById('left').classList.remove('selected');
-                currentSide = 'right';
-                 document.getElementById("response-generator").style.display = "none";
-                document.getElementById("situationship-advice").style.display = "block";
-            }
-        });
-    </script>
-<!---->
-
-
-        <div id="response-generator">
-        
-          <h4 style="color:lightcoral"">paste convo or upload screenshot below</h4>
-          <textarea id="inputField" placeholder="paste the conversation history here"></textarea>
-          <br/>
-
-          <b>
-          <label for="imageInput" class="custom-file-upload" id="imglabel">
-          upload screenshot of chat
-          </label>
-          </b>
-          <input type="file" id="imageInput" accept="image/*">
-          <br/>
-          <span id="credits" ></span><br/>
-          <b>
-
-          <!----->
-            <div class="segmented-button">
-          <div class="segment char-selected" onclick="selectCharacter(this, 'nonchalant')">nonchalant</div>
-          <div class="segment" onclick="selectCharacter(this, 'dirty')">dirty</div>
-          <div class="segment" onclick="selectCharacter(this, 'chalant')">witty</div>
-      </div>
-
-      <script>
-
-          function selectCharacter(element, selectedCharacter) {
-              document.querySelectorAll('.segment').forEach(seg => seg.classList.remove('char-selected'));
-              element.classList.add('char-selected');
-              window.character = selectedCharacter;
-              console.log("Selected character:", character);
-          }
-      </script>
-            <!----->
-
-
-          <button id="respondButton">respond ᡣ𐭩</button>
-          </b>
-          <div id="responseContainer" ></div>
-
-      </div>
-
-      <div id="situationship-advice" style="display:none">
-
-         <h4 style="color:lightcoral">your nonchalant nondelusional bestie (with rizz)</h4>
-          <textarea class="textbox" id="storyInput" placeholder="okay bestie, explain the situation about that boy/girl here... (use voice type on your keyboard if it's a long story)" rows="5" style="height: 200px;"></textarea>
-          <br>
-          <button class="button" id="adviceButton" onclick="getAdvice()">Get Advice</button>
-            <br/>
-          <span id="credits2" ></span><br/>
-          <div class="sit-response" id="responseBlock"></div>
+        <!-- Chat History Navigation -->
+        <div id="chat-history-container">
+            <div class="chat-history-wrapper">
+                <div id="chat-history-list" class="chat-history-list">
+                    <!-- Chat history boxes will be dynamically added here -->
+                </div>
+            </div>
+            <div id="chat-history-note" class="chat-history-note" style="display: none;">
+                <small>💡 Core advice features work independently of chat history</small>
+            </div>
         </div>
-        </center>
-        <script>
 
-
-          async function getAdvice() {
-
-
-
-
-
+        <!-- Main Interface -->        
+        <div id="main-interface">
+          <h4 style="color:lightcoral">paste convo or upload screenshots below</h4>
+          
+          <!-- Input Area with File Upload -->
+          <div class="input-container">
+              <textarea id="inputField" placeholder="paste the conversation history here or describe your situation..."></textarea>
               
-            const story = document.getElementById("storyInput").value;
-            const adbutton = document.getElementById("adviceButton");
-            const responseBlock = document.getElementById("responseBlock");
-
-            if (window.userId == undefined) {
-              alert("Please sign in first");
-              return;
-            }
-
-            if (!story) {
-              alert("Please enter a story!");
-              return;
-            }
-
-            // Change button text to "Loading..." while fetching data
-            adbutton.innerHTML = "deeply thinking... <br/> (this takes 1 minute)";
-            adbutton.disabled = true;
-            adbutton.style.backgroundColor = "gray";
-
-
-
-
-
-                        //////////FETCH USER CREDITS//////////
-                try {
-    console.log("checking credits");
-    const url = `https://api.dubrizz.com/credits?uid=${encodeURIComponent(window.userId)}`;
-    console.log("Fetching credits from:", url);
-    
-    const response = await fetch(url);
-    console.log("Response received:", response);
-
-    const data = await response.json();
-    console.log("Credits data:", data);
-
-    if (data.credits !== undefined) {
-        if (data.credits == 0) {
-            document.getElementById("credits2").innerHTML = `u ran out of credits, get more with <a href="` + document.getElementById("paylink").href + `">pro</a>`;
-            adbutton.innerHTML = "Get Advice";
-              adbutton.disabled = false;
-               adbutton.style.backgroundColor = "lightcoral";
-            return;
-        } else {
-            document.getElementById("credits2").innerHTML = `credits remaining: <b>${data.credits}</b>`;
-        }
-    }
-} catch (error) {
-    console.error("Error fetching credits:", error);
-}
-console.log("done checking credits");
-
-              //////////////////
-            console.log("done checking credits");
-
-
-
+              <!-- File Upload Area -->
+              <div class="file-upload-area">
+                  <button id="upload-btn" class="upload-screenshots-btn">
+                      📎 + upload screenshots
+                  </button>
+                  <input type="file" id="imageInput" accept="image/*" multiple style="display: none;">
+                  <div id="uploaded-files-preview" class="uploaded-files-preview"></div>
+              </div>
               
+              <!-- Submit Button -->
+              <button id="submitButton" class="submit-btn">analyze situation ᡣ𐭩</button>
+          </div>
+          
+          <!-- Credits Display -->
+          <span id="credits"></span><br/>
 
-         
-            try {
-              const apiUrl = `https://api.dubrizz.com/advice`;
+          <!-- Loading Animation -->
+          <div id="loading-container" class="loading-container" style="display: none;">
+              <div class="loading-text">Analyzing your situation...</div>
+              <div class="progress-container">
+                  <div id="progress-bar" class="progress-bar"></div>
+              </div>
+              <div id="progress-text" class="progress-text">0%</div>
+              <div id="reasoning-stream" class="reasoning-stream"></div>
+          </div>
 
-                const response = await fetch(apiUrl, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    history: story,
-                    id: window.userId,
-                  }),
-                });
-
-              // Check if the response is successful
-              if (!response.ok) {
-                throw new Error(`API request failed with status: ${response.status}`);
-              }
-
-              const data = await response.json();
-              const parsedData = JSON.parse(data.response);  // Parse the "response" field
-
-              console.log("Parsed API Response:", parsedData);  // Log the parsed response for debugging
-              displayAdvice(parsedData);
-            } catch (error) {
-              console.error("Error fetching advice:", error);
-              alert("There was an issue with the API request.");
-            } finally {
-              // Reset the button text after the API call finishes
-              adbutton.innerHTML = "Get Advice";
-              adbutton.disabled = false;
-               adbutton.style.backgroundColor = "lightcoral";
-            }
-          }
-
-          function displayAdvice(data) {
-            const responseBlock = document.getElementById("responseBlock");
-            responseBlock.innerHTML = ""; // Clear previous response
-
-            if (!data || !data.sumother || !data.why || !data.do) {
-              responseBlock.innerHTML = "<p>No advice available for the given input. Please try again.</p>";
-              return;
-            }
-
-            // Sumother section
-            const sumotherDiv = document.createElement("div");
-            sumotherDiv.innerHTML = `<h3>Summary</h3><p>${data.sumother}</p>`;
-            responseBlock.appendChild(sumotherDiv);
-
-            // Why section
-            if (data.why && data.why.length > 0) {
-              const whyDiv = document.createElement("div");
-              whyDiv.innerHTML = "<h3>Why?</h3><ul>" + data.why.map(item => `<li>${item}</li>`).join('') + "</ul>";
-              responseBlock.appendChild(whyDiv);
-            }
-
-            // Do section
-            if (data.do && data.do.length > 0) {
-              const doDiv = document.createElement("div");
-              doDiv.innerHTML = "<h3>What to Do?</h3><ul>" + data.do.map(item => `<li>${item}</li>`).join('') + "</ul>";
-              responseBlock.appendChild(doDiv);
-            }
-
-              
-
-            
-
-
-
-              
-          }
-        </script>
-      </div>
-
-
+          <!-- Response Container -->
+          <div id="responseContainer" class="response-container"></div>
+        </div>
+    </div>
 </center>
-
-
-  </div>
-
-
-
-
-
-
 
 <div style="position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50px; /* Adjust height as desired for the fade effect */
+  height: 50px;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0) 0%,
     rgba(255, 255, 255, 1) 100%
   );
-  pointer-events: none; /* Allows interactions with content underneath */
-  z-index: 10; ">
+  pointer-events: none;
+  z-index: 10;">
+</div>
 
-
-
-
-  </div>
-
-
-
-
-
-
-
+<!-- Sample Response Template (shown when not logged in) -->
+<div id="sample-response" class="sample-response" style="display: none;">
+    <div class="response-grid">
+        <div class="advice-section">
+            <h3>💭 Situation Analysis</h3>
+            <p>This is a sample response showing how I analyze situations. Sign in to get personalized advice!</p>
+        </div>
+        
+        <div class="attachment-section">
+            <h3>🧠 Attachment Styles</h3>
+            <div class="attachment-grid">
+                <div class="attachment-card user-attachment">
+                    <h4>Your Style: Secure</h4>
+                    <p>You communicate clearly and handle conflicts well</p>
+                </div>
+                <div class="attachment-card their-attachment">
+                    <h4>Their Style: Anxious</h4>
+                    <p>They might need more reassurance in relationships</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flags-section">
+            <h3>🚩 Red & Green Flags</h3>
+            <div class="flags-grid">
+                <div class="red-flags">
+                    <h4>🔴 Red Flags</h4>
+                    <ul>
+                        <li>Sample red flag analysis</li>
+                        <li>Another concern to watch</li>
+                    </ul>
+                </div>
+                <div class="green-flags">
+                    <h4>🟢 Green Flags</h4>
+                    <ul>
+                        <li>Sample positive sign</li>
+                        <li>Healthy communication pattern</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="responses-section">
+            <h3>💬 Suggested Responses</h3>
+            <div class="response-buttons">
+                <button class="response-option">Sample nonchalant response</button>
+                <button class="response-option">Another suggested reply</button>
+                <button class="response-option">Witty comeback option</button>
+            </div>
+        </div>
+    </div>
+</div>
     
 </body>
 </html>
