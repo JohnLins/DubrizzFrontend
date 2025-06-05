@@ -37,6 +37,11 @@ auth.languageCode = 'en';
 const provider = new GoogleAuthProvider();
 const analytics = getAnalytics(app);
 
+console.log('Firebase initialized successfully');
+console.log('Firebase app:', app);
+console.log('Firestore db:', db);
+console.log('Auth object:', auth);
+
 // Copy text function
 window.copyText = function(button) {
   const textToCopy = button.innerText;
@@ -110,6 +115,10 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     window.userId = user.uid;
     userName = user.displayName;
+    
+    console.log('User authenticated:', user.uid);
+    console.log('User email:', user.email);
+    console.log('Auth state:', auth.currentUser);
 
     const userDiv = document.getElementById('user');
     const googleLoginBtn = document.getElementById('google-login-btn');
@@ -123,6 +132,8 @@ onAuthStateChanged(auth, (user) => {
     clearInterface();
     document.getElementById('sample-response').style.display = 'none';
   } else {
+    console.log('User not authenticated');
+    window.userId = undefined;
     // Show sample response when not logged in
     showSampleResponse();
   }
@@ -134,10 +145,94 @@ googleLogin.addEventListener("click", function() {
   signin();
 });
 
+// Sample response data (stored as JSON)
+const sampleResponseData = {
+  "analysis": "She's testing your interest level and seeing how you'll react. This is classic behavior when someone's uncertain about where they stand. The delayed responses and short answers suggest she's either playing hard to get or genuinely busy but maintaining some interest.",
+  "why": [
+    "She's testing your patience and seeing if you'll chase",
+    "She might be talking to other people and comparing options", 
+    "She's unsure about her feelings and buying time to figure them out",
+    "She's using scarcity to increase her perceived value"
+  ],
+  "attachment_styles": {
+    "user": "Anxious-Secure",
+    "user_description": "You're analyzing her behavior closely, showing some anxious tendencies but asking for advice shows self-awareness",
+    "their": "Avoidant-Anxious", 
+    "their_description": "Hot and cold behavior, creating distance when things get too close but still maintaining contact"
+  },
+  "flags": {
+    "red": [
+      "Inconsistent communication patterns",
+      "Making you question where you stand",
+      "Not matching your energy investment"
+    ],
+    "green": [
+      "Still responding to your messages",
+      "Initiated some conversations recently",
+      "Hasn't completely cut contact" 
+    ]
+  },
+  "do": [
+    "Mirror her energy - if she's distant, you be distant too",
+    "Don't double text or chase when she goes quiet",
+    "Focus on other options and building your social circle", 
+    "When she does reach out, be friendly but not overly eager",
+    "Give her space to come to you instead of pursuing"
+  ],
+  "responses": [
+    "haha fair enough",
+    "cool, lmk when you're free",
+    "no worries, catch you later",
+    "sounds good 👍"
+  ]
+};
+
+// Sample input text
+const sampleInputText = `Her: hey what's up
+Me: not much just chilling, you?
+Her: same, just watching netflix
+Me: nice what show?
+Her: just some random thing
+Me: cool cool
+[seen 3 hours ago]
+Me: hey you free this weekend?
+[seen 2 days ago]
+Her: sorry been super busy with work
+Me: no worries, maybe next time
+Her: yeah definitely
+
+She used to text me back way faster and now it takes forever. What's going on?`;
+
 // Show sample response
 function showSampleResponse() {
-  document.getElementById('sample-response').style.display = 'block';
+  // Hide the separate sample response div
+  document.getElementById('sample-response').style.display = 'none';
+  
+  // Add sample input text
+  document.getElementById('inputField').value = sampleInputText;
+  
+  // Display the sample response using the same function as real responses
+  displayEnhancedResponse(sampleResponseData);
+  
+  // Dim the main interface to show it's a sample
   document.getElementById('main-interface').style.opacity = '0.7';
+  
+  // Add a notice that this is a sample
+  const responseContainer = document.getElementById('responseContainer');
+  const sampleNotice = document.createElement('div');
+  sampleNotice.className = 'sample-notice';
+  sampleNotice.innerHTML = `
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                color: white; 
+                padding: 15px; 
+                border-radius: 10px; 
+                margin-bottom: 20px; 
+                text-align: center;
+                font-weight: bold;">
+      🎭 This is a sample analysis - Sign in to get personalized advice for your situation!
+    </div>
+  `;
+  responseContainer.insertBefore(sampleNotice, responseContainer.firstChild);
 }
 
 // Clear interface
@@ -147,6 +242,7 @@ function clearInterface() {
   uploadedFiles = [];
   updateFilePreview();
   document.getElementById('main-interface').style.opacity = '1';
+  document.getElementById('sample-response').style.display = 'none';
 }
 
 // Fetch user credits
@@ -558,7 +654,10 @@ function displayChatHistoryUnavailable() {
 }
 
 async function saveChatToHistory(input, response) {
-  if (!window.userId) return;
+  if (!window.userId) {
+    console.log('User not authenticated, skipping chat save');
+    return;
+  }
   
   try {
     // Generate chat title using first part of input
@@ -572,13 +671,27 @@ async function saveChatToHistory(input, response) {
       timestamp: new Date()
     };
     
+    console.log('Attempting to save chat to Firestore:', chatData);
+    
     const docRef = await addDoc(collection(db, 'chats'), chatData);
     currentChatId = docRef.id;
+    
+    console.log('Chat saved successfully with ID:', currentChatId);
     
     // Reload chat history
     await loadChatHistory();
   } catch (error) {
-    console.warn('Could not save chat to history (Firebase permissions):', error.message);
+    console.error('Firebase save error details:', error);
+    console.error('Error code:', error.code);
+    console.error('Error message:', error.message);
+    
+    // More specific error handling
+    if (error.code === 'permission-denied') {
+      console.error('Permission denied - check Firestore rules');
+    } else if (error.code === 'unauthenticated') {
+      console.error('User not authenticated properly');
+    }
+    
     // Don't fail the entire process if we can't save to history
     // The analysis still works fine
   }
