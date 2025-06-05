@@ -10,6 +10,7 @@ let userName;
 let uploadedFiles = [];
 let currentChatId = null;
 let chatHistory = [];
+let sampleShown = false;  // Flag to prevent duplicate sample responses
 
 // API Configuration
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
@@ -205,6 +206,12 @@ She used to text me back way faster and now it takes forever. What's going on?`;
 
 // Show sample response
 function showSampleResponse() {
+  // Prevent showing sample multiple times
+  if (sampleShown) return;
+  
+  // Clear any existing content first
+  document.getElementById('responseContainer').innerHTML = '';
+  
   // Hide the separate sample response div
   document.getElementById('sample-response').style.display = 'none';
   
@@ -233,6 +240,9 @@ function showSampleResponse() {
     </div>
   `;
   responseContainer.insertBefore(sampleNotice, responseContainer.firstChild);
+  
+  // Mark sample as shown
+  sampleShown = true;
 }
 
 // Clear interface
@@ -243,6 +253,9 @@ function clearInterface() {
   updateFilePreview();
   document.getElementById('main-interface').style.opacity = '1';
   document.getElementById('sample-response').style.display = 'none';
+  
+  // Reset sample flag
+  sampleShown = false;
 }
 
 // Fetch user credits
