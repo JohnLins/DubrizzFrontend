@@ -1,21 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');        
+
 * {
     font-family: "Montserrat", serif;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     height: 100vh;
     margin: 0;
+    padding: 0;
     background-color: #f5f5f5;
 }
 
 .container {
-    padding: 30px;
+    padding: 30px 20px;
     text-align: center;
-    width: 80%;
+    width: 100%;
     max-width: 800px;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
+    box-sizing: border-box;
 }
 
 #credits {
@@ -40,13 +49,16 @@ body {
 
 /* Chat History Navigation */
 #chat-history-container {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .chat-history-wrapper {
     width: 100%;
     overflow-x: auto;
     padding: 10px 0;
+    box-sizing: border-box;
 }
 
 .chat-history-list {
@@ -54,6 +66,7 @@ body {
     gap: 10px;
     padding: 0 10px;
     min-width: fit-content;
+    box-sizing: border-box;
 }
 
 .chat-history-item {
@@ -72,6 +85,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-sizing: border-box;
 }
 
 .chat-history-item:hover {
@@ -87,8 +101,6 @@ body {
     box-shadow: 0 4px 15px rgba(240, 128, 128, 0.4);
 }
 
-
-
 /* Input Container */
 .input-container {
     background: white;
@@ -96,10 +108,13 @@ body {
     padding: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 textarea {
     width: 100%;
+    max-width: 100%;
     padding: 15px;
     box-sizing: border-box;
     border: none;
@@ -542,13 +557,35 @@ textarea {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        width: 95%;
-        padding: 20px;
+        width: 100%;
+        padding: 15px 10px;
+        margin: 20px 0 0 0;
+    }
+    
+    .input-container {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        height: 100px;
     }
     
     .chat-history-item {
         min-width: 100px;
         font-size: 0.75em;
+        padding: 6px 10px;
+    }
+    
+    .chat-history-wrapper {
+        padding: 5px 0;
+    }
+    
+    .chat-history-list {
+        padding: 0 5px;
     }
     
     .attachment-grid,
@@ -563,6 +600,17 @@ textarea {
     .sample-response {
         max-width: 95vw;
         padding: 20px;
+        margin: 0 2.5vw;
+    }
+    
+    .submit-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .upload-screenshots-btn {
+        padding: 10px 15px;
+        font-size: 13px;
     }
 }
 
