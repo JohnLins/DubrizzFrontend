@@ -535,8 +535,8 @@ function startProgressBar() {
   progressBar.style.width = '0%';
   progressText.textContent = '0%';
   
-  // Progress bar will complete in ~30 seconds (typical API response time)
-  const totalDuration = 30000; // 30 seconds
+  // Progress bar will complete in ~120 seconds (typical API response time)
+  const totalDuration = 120000; // 30 seconds
   const updateInterval = totalDuration / 120; // 120 sections
   let currentProgress = 0;
   
@@ -720,6 +720,10 @@ function loadChat(chat) {
   currentChatId = chat.id;
   displayChatHistory(); // Update active state
   
+  // Load the original input into the text field
+  const inputField = document.getElementById('inputField');
+  inputField.value = chat.input || '';
+  
   // Display the saved response
   displayEnhancedResponse(chat.response);
 }
@@ -727,6 +731,10 @@ function loadChat(chat) {
 // Enhanced response display with fallbacks
 function displayEnhancedResponse(data) {
   hideLoading();
+  
+  // Clear the response container first instead of appending
+  const responseContainer = document.getElementById('responseContainer');
+  responseContainer.innerHTML = '';
   
   const responseGrid = document.createElement('div');
   responseGrid.className = 'response-grid';
