@@ -536,7 +536,7 @@ function startProgressBar() {
   progressText.textContent = '0%';
   
   // Progress bar will complete in ~120 seconds (typical API response time)
-  const totalDuration = 120000; // 30 seconds
+  const totalDuration = 50000; // 30 seconds
   const updateInterval = totalDuration / 120; // 120 sections
   let currentProgress = 0;
   
